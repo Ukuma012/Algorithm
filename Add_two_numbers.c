@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-// @TODO linkedlist
+// @TODO use linkedlist
+// input: 2 4 3\n
+//        5 6 4\n
+//
+// l1: 2 4 3 -> 342
+// l2: 5 6 4 -> 465
+// add: 342+465 = 807
+// then: 807 -> 7 0 8
 
 struct ListNode {
     int val;
@@ -10,8 +17,7 @@ struct ListNode {
 
 int main(int argc, char *argv[]) {
     int c;
-    char l1[100];
-    char l2[100];
+    struct ListNode l1_header, l2_header;
     int i = 0;
     int j = 0;
     printf("%s", "l1: ");
@@ -22,9 +28,15 @@ int main(int argc, char *argv[]) {
         if(c == ' ' || c == '\t') {
             continue;
         }
-        l1[i] = c;
-        i++;
+
+        // ListNode
+        struct ListNode *p;
+        if((p = malloc(sizeof(struct ListNode))) == NULL) {
+            fprintf(stderr, "malloc failed\n");
+            exit(1);
+        }
     }
+
     printf("%s", "l2: ");
     while((c = getchar()) != EOF) {
         if(c == '\n') {
@@ -33,10 +45,8 @@ int main(int argc, char *argv[]) {
         if(c == ' ' || c == '\t') {
             continue;
         }
-        l2[j] = c;
-        j++;
+
+        // ListNode
     }
-
-
     return 0;
 }
