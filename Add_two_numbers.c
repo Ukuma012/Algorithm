@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+// @TODO linkedlist
+
 struct ListNode {
     int val;
     struct ListNode *next;
