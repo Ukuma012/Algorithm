@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // @TODO use linkedlist
 // input: 2 4 3\n
@@ -15,38 +16,15 @@ struct ListNode {
     struct ListNode *next;
 };
 
+// @TODO まずは一行をlinke list にinsertする
 int main(int argc, char *argv[]) {
-    int c;
-    struct ListNode l1_header, l2_header;
-    int i = 0;
-    int j = 0;
+    char *line = NULL;
+    size_t linecap = 0;
+    ssize_t linelen;
     printf("%s", "l1: ");
-    while((c = getchar()) != EOF) {
-        if(c == '\n') {
-            break;
-        }
-        if(c == ' ' || c == '\t') {
-            continue;
-        }
-
-        // ListNode
-        struct ListNode *p;
-        if((p = malloc(sizeof(struct ListNode))) == NULL) {
-            fprintf(stderr, "malloc failed\n");
-            exit(1);
-        }
-    }
-
-    printf("%s", "l2: ");
-    while((c = getchar()) != EOF) {
-        if(c == '\n') {
-            break;
-        }
-        if(c == ' ' || c == '\t') {
-            continue;
-        }
-
-        // ListNode
+    while((linelen = getline(&line, &linecap, stdin)) > 0) {
+        fwrite(line, linelen, 1, stdout);
+        exit(0);
     }
     return 0;
 }
