@@ -11,6 +11,9 @@
 // add: 342+465 = 807
 // then: 807 -> 7 0 8
 
+// @TODO 関数にまとめる
+// @TODO l2を実装
+
 struct ListNode
 {
     int val;
