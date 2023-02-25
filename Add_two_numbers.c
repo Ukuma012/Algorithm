@@ -12,7 +12,6 @@
 // then: 807 -> 7 0 8
 
 // @TODO 関数にまとめる
-// @TODO l2を実装
 
 struct ListNode
 {
@@ -24,8 +23,9 @@ void insert(struct ListNode *, int);
 
 int main(int argc, char *argv[])
 {
-    struct ListNode header;
-    header.next = NULL;
+    struct ListNode l1header, l2header;
+    l1header.next = NULL;
+    l2header.next = NULL;
     char *whitespace = " \t";
     char *line = NULL;
     size_t linecap = 0;
@@ -45,14 +45,39 @@ int main(int argc, char *argv[])
             // insert
             // 数値に変換
             int val = *value - '0';
-            insert(&header, val);
+            insert(&l1header, val);
         }
         struct ListNode *p;
-        for (p = header.next; p != NULL; p = p->next)
+        for (p = l1header.next; p != NULL; p = p->next)
         {
             printf("%d\n", p->val);
         }
-        exit(0);
+        free(p);
+        break;
+    }
+
+    printf("%s", "l2: ");
+    while ((linelen = getline(&line, &linecap, stdin)) > 0)
+    {
+        while ((value = strsep(&line, whitespace)) != NULL)
+        {
+            if (*value == '\0')
+            {
+                continue;
+            }
+
+            // insert
+            // 数値に変換
+            int val = *value - '0';
+            insert(&l2header, val);
+        }
+        struct ListNode *q;
+        for (q = l2header.next; q != NULL; q = q->next)
+        {
+            printf("%d\n", q->val);
+        }
+        free(q);
+        break;
     }
     return 0;
 }
