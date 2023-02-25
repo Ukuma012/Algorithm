@@ -18,10 +18,14 @@ struct ListNode
     struct ListNode *next;
 };
 
+void insert(struct ListNode *, int);
+
 
 // @TODO まずは一行をlinke list にinsertする
 int main(int argc, char *argv[])
 {
+    struct ListNode header;
+    header.next = NULL;
     char *whitespace = " \t";
     char *line = NULL;
     size_t linecap = 0;
@@ -41,9 +45,24 @@ int main(int argc, char *argv[])
             // insert
             // 数値に変換
             int val = *value - '0';
-            printf("%d", val);
+            insert(&header, val);
+        }
+        struct ListNode *p;
+        for(p = header.next; p != NULL; p = p->next) {
+            printf("%d\n", p->val);
         }
         exit(0);
     }
     return 0;
+}
+
+void insert(struct ListNode *head, int val) {
+    struct ListNode *new;
+    if((new = malloc(sizeof(struct ListNode))) == NULL) {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    new->val = val;
+    new->next = (*head).next;
+    (*head).next = new;
 }
