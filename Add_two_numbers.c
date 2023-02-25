@@ -11,7 +11,6 @@
 // add: 342+465 = 807
 // then: 807 -> 7 0 8
 
-
 struct ListNode
 {
     int val;
@@ -20,8 +19,6 @@ struct ListNode
 
 void insert(struct ListNode *, int);
 
-
-// @TODO まずは一行をlinke list にinsertする
 int main(int argc, char *argv[])
 {
     struct ListNode header;
@@ -48,7 +45,8 @@ int main(int argc, char *argv[])
             insert(&header, val);
         }
         struct ListNode *p;
-        for(p = header.next; p != NULL; p = p->next) {
+        for (p = header.next; p != NULL; p = p->next)
+        {
             printf("%d\n", p->val);
         }
         exit(0);
@@ -56,9 +54,11 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void insert(struct ListNode *head, int val) {
+void insert(struct ListNode *head, int val)
+{
     struct ListNode *new;
-    if((new = malloc(sizeof(struct ListNode))) == NULL) {
+    if ((new = malloc(sizeof(struct ListNode))) == NULL)
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
