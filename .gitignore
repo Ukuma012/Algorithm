@@ -1,3 +1,4 @@
 *.out
 Add_two_numbers
 *.dSYM/
+.DS_Store
