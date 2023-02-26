@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
         for (p = l1header.next; p != NULL; p = p->next)
         {
             // 1数字ごとに処理
+            // 0をどう処理するか
             printf("%d\n", p->val);
         }
         free(p);
