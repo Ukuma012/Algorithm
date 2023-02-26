@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
         struct ListNode *p;
         for (p = l1header.next; p != NULL; p = p->next)
         {
+            // 1数字ごとに処理
             printf("%d\n", p->val);
         }
         free(p);
@@ -72,6 +73,7 @@ int main(int argc, char *argv[])
         struct ListNode *q;
         for (q = l2header.next; q != NULL; q = q->next)
         {
+            // 1数字ごとに処理
             printf("%d\n", q->val);
         }
         free(q);
