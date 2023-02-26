@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     char *value;
 
     printf("%s", "l1: ");
+    int l1count = 0;
     while ((linelen = getline(&line, &linecap, stdin)) > 0)
     {
         while ((value = strsep(&line, whitespace)) != NULL)
@@ -44,12 +45,15 @@ int main(int argc, char *argv[])
             // 数値に変換
             int val = *value - '0';
             insert(&l1header, val);
+            l1count++;
         }
+        printf("%d\n", l1count);
         struct ListNode *p;
         for (p = l1header.next; p != NULL; p = p->next)
         {
             // 1数字ごとに処理
             // 0をどう処理するか
+
             printf("%d\n", p->val);
         }
         free(p);
