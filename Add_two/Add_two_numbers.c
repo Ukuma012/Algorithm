@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 // @TODO use linkedlist
 // input: 2 4 3\n
@@ -29,6 +30,9 @@ int main(int argc, char *argv[])
     size_t linecap = 0;
     ssize_t linelen;
     char *value;
+    int base = 10;
+    int l1result = 0;
+    int l2result = 0;
 
     printf("%s", "l1: ");
     int l1count = 0;
@@ -41,26 +45,25 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            // insert
             // 数値に変換
             int val = *value - '0';
             insert(&l1header, val);
             l1count++;
         }
-        printf("%d\n", l1count);
+        l1count--;
         struct ListNode *p;
         for (p = l1header.next; p != NULL; p = p->next)
         {
-            // 1数字ごとに処理
-            // 0をどう処理するか
-
-            printf("%d\n", p->val);
+            int i = p->val * pow(base, l1count);
+            l1result = l1result + i;
+            l1count--;
         }
         free(p);
         break;
     }
 
     printf("%s", "l2: ");
+    int l2count = 0;
     while ((linelen = getline(&line, &linecap, stdin)) > 0)
     {
         while ((value = strsep(&line, whitespace)) != NULL)
@@ -70,20 +73,25 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            // insert
             // 数値に変換
             int val = *value - '0';
             insert(&l2header, val);
+            l2count++;
         }
+        l2count--;
         struct ListNode *q;
         for (q = l2header.next; q != NULL; q = q->next)
         {
-            // 1数字ごとに処理
-            printf("%d\n", q->val);
+            int i = q->val * pow(base, l2count);
+            l2result = l2result + i;
+            l2count--;
         }
         free(q);
         break;
     }
+
+    int result = l1result + l2result;
+    printf("%d\n", result);
     return 0;
 }
 
