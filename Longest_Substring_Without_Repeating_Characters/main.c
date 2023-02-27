@@ -2,6 +2,10 @@
 
 int main(int argc, char *argv[]) {
     char *s = argv[1];
-    printf("%s\n", s);
+    int i = 0;
+    while(s[i] != '\0') {
+        printf("%c\n", s[i]);
+        i++;
+    }
     return 0;
 }
