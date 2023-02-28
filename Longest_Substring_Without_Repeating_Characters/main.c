@@ -1,5 +1,26 @@
 #include <stdio.h>
 
+#define EMPTY (int) 500;
+
+// hashはASCIIへの変換 128個
+#define BUCKET_SIZE 128
+
+// SCIIの128個hash tableを用意すればいい
+// charに対応するkeyを探索、登録されていなければindexを登録
+//　                    　登録されていればindexを更新
+typedef struct bucket {
+    int key;
+    int index;
+} BUCKET;
+BUCKET table[BUCKET_SIZE];
+
+void init() {
+    int i;
+    for(i = 0; i < BUCKET_SIZE; i++) {
+        table[i].key = EMPTY;
+    }
+}
+
 int main(int argc, char *argv[]) {
     char *s = argv[1];
     int i = 0;
