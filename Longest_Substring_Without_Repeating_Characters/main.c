@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+// hash
+// keyequal
+
 #define EMPTY (int) -1;
 
 // hashはASCIIへの変換 128個
