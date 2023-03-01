@@ -29,22 +29,29 @@ int hash(char key) {
 }
 
 int main(int argc, char *argv[]) {
+
     init();
 
+    int count = 0;
     char *s = argv[1];
     int i = 0;
-    while(s[i] != '\0') {
-        int h = hash(s[i]);
-        table[h].key = h;
-        table[h].index = i;
-        i++;
+    int j = 0;
+    while(s[j] != '\0') {
+        int h = hash(s[j]);
+        if(table[h].index == -1) {
+            table[h].key = h;
+            table[h].index = j;
+
+            if((j - i + 1) > count) {
+                count = j - i + 1;
+            }
+        } else {
+            i = table[h].index + 1;
+            table[h].index = j; 
+        }
+        j++;
     }
 
-    for(int i = 0; i < 128; i++) {
-        if(table[i].index == -1) {
-            continue;
-        }
-        printf("%c %d\n", (char)i, table[i].index);
-    }
+    printf("%d\n", count);
     return 0;
 }
