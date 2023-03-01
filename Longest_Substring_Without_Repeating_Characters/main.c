@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define EMPTY (int) 500;
+#define EMPTY (int) -1;
 
 // hashはASCIIへの変換 128個
 #define BUCKET_SIZE 128
