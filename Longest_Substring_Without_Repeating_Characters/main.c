@@ -19,7 +19,7 @@ BUCKET table[BUCKET_SIZE];
 void init() {
     int i;
     for(i = 0; i < BUCKET_SIZE; i++) {
-        table[i].key = EMPTY;
+        table[i].index = EMPTY;
     }
 }
 
@@ -34,8 +34,17 @@ int main(int argc, char *argv[]) {
     char *s = argv[1];
     int i = 0;
     while(s[i] != '\0') {
-        printf("%d\n", hash(s[i]));
+        int h = hash(s[i]);
+        table[h].key = h;
+        table[h].index = i;
         i++;
+    }
+
+    for(int i = 0; i < 128; i++) {
+        if(table[i].index == -1) {
+            continue;
+        }
+        printf("%c %d\n", (char)i, table[i].index);
     }
     return 0;
 }
