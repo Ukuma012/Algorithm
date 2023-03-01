@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// hash
 // keyequal
 
 #define EMPTY (int) -1;
@@ -24,12 +23,18 @@ void init() {
     }
 }
 
+int hash(char key) {
+    int ascii = (int) key;
+    return ascii;
+}
+
 int main(int argc, char *argv[]) {
     init();
 
     char *s = argv[1];
     int i = 0;
     while(s[i] != '\0') {
+        printf("%d\n", hash(s[i]));
         i++;
     }
     return 0;
