@@ -13,8 +13,8 @@ assert() {
   fi
 }
 
-assert "abcabccbb" "abcabccbb"
-assert "bbbbb" "bbbbb"
-assert "pwwkew" "pwwkew"
+assert "abcabccbb" 3
+assert "bbbbb" 1
+assert "pwwkew" 3
 
 echo OK
