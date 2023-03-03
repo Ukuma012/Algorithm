@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+// 入力を受ける
 // まずはadjacency list of a given graphを作る
 
 // graph
