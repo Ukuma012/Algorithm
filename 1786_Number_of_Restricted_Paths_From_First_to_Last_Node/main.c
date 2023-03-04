@@ -31,6 +31,14 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
+        int c;
+        if((c = getchar()) != EOF) {
+            if(c == 'q') {
+                printf("%s\n", "Hi");
+            }
+            putc(c, stdout);
+        }
+
     printf("%s\n", "Hello World");
 
     return 0;
