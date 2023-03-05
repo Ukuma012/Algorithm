@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// 入力を受ける
 // まずはadjacency list of a given graphを作る
 
 // graph
 #define MAXV 20000 // 2 * 10^4
+
+// @TODO 入力を受け取るように
+int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
 
 typedef struct
 {
@@ -31,15 +33,10 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-        int c;
-        if((c = getchar()) != EOF) {
-            if(c == 'q') {
-                printf("%s\n", "Hi");
-            }
-            putc(c, stdout);
-        }
+    for(int j = 0; j < 21; j++) {
+        printf("%d ", input[j]);
+    }
 
-    printf("%s\n", "Hello World");
 
     return 0;
 }
