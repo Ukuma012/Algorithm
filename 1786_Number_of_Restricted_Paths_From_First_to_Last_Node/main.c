@@ -3,10 +3,13 @@
 #include <stdbool.h>
 
 // まずはadjacency list of a given graphを作る
-#define MAXV 5
+// #define MAXV 5
+#define MAXV 6
 
 // @TODO 入力を受け取るように
-int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
+// int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
+
+int input[27] = {1, 2, 5, 1, 5, 6, 2, 3, 3, 2, 4, 2, 3, 4, 4, 3, 6, 8, 4, 5, 3, 4, 6, 1, 5, 6, 9};
 
 struct edgenode
 {
