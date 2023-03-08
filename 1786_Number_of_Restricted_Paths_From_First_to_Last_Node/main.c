@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAXV 5
-// #define MAXV 6
+// #define MAXV 5
+#define MAXV 6
+
+#define MAXWEIGHT 100000
 
 // @TODO 入力を受け取るように
-int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
+// int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
 
-// int input[27] = {1, 2, 5, 1, 5, 6, 2, 3, 3, 2, 4, 2, 3, 4, 4, 3, 6, 8, 4, 5, 3, 4, 6, 1, 5, 6, 9};
+int input[27] = {1, 2, 5, 1, 5, 6, 2, 3, 3, 2, 4, 2, 3, 4, 4, 3, 6, 8, 4, 5, 3, 4, 6, 1, 5, 6, 9};
 
 struct edgenode
 {
@@ -27,7 +29,8 @@ struct graph
 void insert_edge(struct graph *g, int x, int y, int weight, bool directed);
 void init_graph(struct graph *g);
 void print_graph(struct graph *g);
-void setshortest(struct graph *g);
+void setshortest(struct graph *g, int);
+int findshortest(struct graph *g);
 
 int main(int argc, char *argv[])
 {
@@ -47,8 +50,10 @@ int main(int argc, char *argv[])
         insert_edge(g, input[j], input[j + 1], input[j + 2], directed);
     }
 
-    setshortest(g);
-
+    setshortest(g, MAXV);
+    for(int i = 1; i < MAXV; i++) {
+    setshortest(g, findshortest(g));
+    }
     print_graph(g);
     printf("\n");
 
@@ -56,7 +61,25 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-void setshortest(struct graph *g)
+
+int findshortest(struct graph *g) {
+    int shortest = MAXWEIGHT;
+    int j;
+    for(int i = 1; i < MAXV+1; i++) {
+        int current;
+        if(g->shortestpath[i] < 0 || g->finish[i] == true) {
+            continue;
+        }
+        current = g->shortestpath[i];
+        if(shortest > current) {
+            shortest = current;
+            j = i;
+        }
+    }
+    return j;
+}
+
+void setshortest(struct graph *g, int target)
 {
 
     struct edgenode *targetnode;
@@ -66,16 +89,18 @@ void setshortest(struct graph *g)
         exit(1);
     }
 
-    targetnode = g->edges[MAXV];
+    targetnode = g->edges[target];
     while (targetnode != NULL)
     {
-        if (targetnode->weight > g->shortestpath[targetnode->y])
-        {
-            g->shortestpath[targetnode->y] = targetnode->weight;
+        int length = targetnode->weight + g->shortestpath[target];
+        if (g->shortestpath[targetnode->y] == -1) {
+            g->shortestpath[targetnode->y] = length;
+        } else if(length < g->shortestpath[targetnode->y]){
+            g->shortestpath[targetnode->y] = length;
         }
         targetnode = targetnode->next;
     }
-    g->finish[MAXV] = true;
+    g->finish[target] = true;
 }
 
 void print_graph(struct graph *g)
@@ -109,6 +134,9 @@ void init_graph(struct graph *g)
         g->shortestpath[i] = -1;
         g->finish[i] = false;
     }
+
+    // MAXVのshortestpathは0
+    g->shortestpath[MAXV] = 0;
 }
 
 void insert_edge(struct graph *g, int x, int y, int weight, bool directed)
