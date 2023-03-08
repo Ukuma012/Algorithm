@@ -65,7 +65,7 @@ void print_graph(struct graph *g)
     }
     for (i = 1; i < MAXV + 1; i++)
     {
-        printf("%d: ", i);
+        printf("%d %d: ",g->shortestpath[i], i);
         p = g->edges[i];
         while (p != NULL)
         {
