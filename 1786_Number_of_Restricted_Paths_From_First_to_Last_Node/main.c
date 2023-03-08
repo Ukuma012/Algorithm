@@ -51,27 +51,30 @@ int main(int argc, char *argv[])
     }
 
     setshortest(g, MAXV);
-    for(int i = 1; i < MAXV; i++) {
-    setshortest(g, findshortest(g));
+    for (int i = 1; i < MAXV; i++)
+    {
+        setshortest(g, findshortest(g));
     }
     print_graph(g);
     printf("\n");
 
-    // return here
-
     return 0;
 }
 
-int findshortest(struct graph *g) {
+int findshortest(struct graph *g)
+{
     int shortest = MAXWEIGHT;
     int j;
-    for(int i = 1; i < MAXV+1; i++) {
+    for (int i = 1; i < MAXV + 1; i++)
+    {
         int current;
-        if(g->shortestpath[i] < 0 || g->finish[i] == true) {
+        if (g->shortestpath[i] < 0 || g->finish[i] == true)
+        {
             continue;
         }
         current = g->shortestpath[i];
-        if(shortest > current) {
+        if (shortest > current)
+        {
             shortest = current;
             j = i;
         }
@@ -93,9 +96,13 @@ void setshortest(struct graph *g, int target)
     while (targetnode != NULL)
     {
         int length = targetnode->weight + g->shortestpath[target];
-        if (g->shortestpath[targetnode->y] == -1) {
+
+        if (g->shortestpath[targetnode->y] == -1)
+        {
             g->shortestpath[targetnode->y] = length;
-        } else if(length < g->shortestpath[targetnode->y]){
+        }
+        else if (length < g->shortestpath[targetnode->y])
+        {
             g->shortestpath[targetnode->y] = length;
         }
         targetnode = targetnode->next;
