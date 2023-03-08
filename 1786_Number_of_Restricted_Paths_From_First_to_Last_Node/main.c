@@ -21,6 +21,7 @@ struct graph
 {
     struct edgenode *edges[MAXV + 1];
     int shortestpath[MAXV+1];
+    bool finish[MAXV+1];
 };
 
 void insert_edge(struct graph *g, int x, int y, int weight, bool directed);
