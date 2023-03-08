@@ -20,8 +20,8 @@ struct edgenode
 struct graph
 {
     struct edgenode *edges[MAXV + 1];
-    int shortestpath[MAXV+1];
-    bool finish[MAXV+1];
+    int shortestpath[MAXV + 1];
+    bool finish[MAXV + 1];
 };
 
 void insert_edge(struct graph *g, int x, int y, int weight, bool directed);
@@ -56,17 +56,21 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-void setshortest(struct graph *g) {
+void setshortest(struct graph *g)
+{
 
     struct edgenode *targetnode;
-    if((targetnode = malloc(sizeof(struct edgenode))) == NULL) {
+    if ((targetnode = malloc(sizeof(struct edgenode))) == NULL)
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
-    };
+    }
 
     targetnode = g->edges[MAXV];
-    while(targetnode != NULL) {
-        if(targetnode->weight > g->shortestpath[targetnode->y]) {
+    while (targetnode != NULL)
+    {
+        if (targetnode->weight > g->shortestpath[targetnode->y])
+        {
             g->shortestpath[targetnode->y] = targetnode->weight;
         }
         targetnode = targetnode->next;
@@ -122,7 +126,8 @@ void insert_edge(struct graph *g, int x, int y, int weight, bool directed)
 
     g->edges[x] = p;
 
-    if(directed == false) {
-    insert_edge(g, y, x, weight, true);
+    if (directed == false)
+    {
+        insert_edge(g, y, x, weight, true);
     }
 }
