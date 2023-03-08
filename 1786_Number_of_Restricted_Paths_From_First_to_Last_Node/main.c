@@ -47,6 +47,9 @@ int main(int argc, char *argv[])
     }
 
     print_graph(g);
+    printf("\n");
+
+    // return here
 
     return 0;
 }
