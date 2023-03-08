@@ -79,6 +79,8 @@ void init_graph(struct graph *g)
     for (i = 1; i <= MAXV; i++)
     {
         g->edges[i] = NULL;
+        g->shortestpath[i] = -1;
+        g->finish[i] = false;
     }
 }
 
