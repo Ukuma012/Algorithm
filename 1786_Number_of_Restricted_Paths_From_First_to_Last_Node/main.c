@@ -67,6 +67,12 @@ int main(int argc, char *argv[])
     print_graph(g);
     printf("\n");
 
+    int seen[MAXV+1];
+    int stack[STACK_MAX];
+    
+
+
+
     return 0;
 }
 
