@@ -7,6 +7,10 @@
 #define MAXV 7
 
 #define MAXWEIGHT 100000
+#define STACK_MAX 100000
+
+int stack[STACK_MAX];
+int n = 0;
 
 // @TODO 入力を受け取るように
 // int input[21] = {1, 2, 3, 1, 3, 3, 2, 3, 1, 1, 4, 2, 5, 2, 2, 3, 5, 1, 5, 4, 10};
@@ -61,7 +65,24 @@ int main(int argc, char *argv[])
     print_graph(g);
     printf("\n");
 
+
     return 0;
+}
+
+void push(int x) {
+    if(n >= STACK_MAX) {
+        fprintf(stderr, "stack overflow\n");
+        exit(1);
+    }
+    stack[n++] = x;
+}
+
+int pop() {
+    if(n <= 0) {
+        fprintf(stderr, "no element\n");
+        exit(1);
+    }
+    return stack[n--];
 }
 
 int findshortest(struct graph *g)
