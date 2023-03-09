@@ -87,7 +87,7 @@ int pop()
         fprintf(stderr, "no element\n");
         exit(1);
     }
-    return stack[n--];
+    return stack[--n];
 }
 
 int findshortest(struct graph *g)
