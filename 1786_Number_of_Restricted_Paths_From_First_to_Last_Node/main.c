@@ -38,6 +38,8 @@ void init_graph(struct graph *g);
 void print_graph(struct graph *g);
 void setshortest(struct graph *g, int);
 int findshortest(struct graph *g);
+void push(int);
+int pop();
 
 int main(int argc, char *argv[])
 {
@@ -65,20 +67,23 @@ int main(int argc, char *argv[])
     print_graph(g);
     printf("\n");
 
-
     return 0;
 }
 
-void push(int x) {
-    if(n >= STACK_MAX) {
+void push(int x)
+{
+    if (n >= STACK_MAX)
+    {
         fprintf(stderr, "stack overflow\n");
         exit(1);
     }
     stack[n++] = x;
 }
 
-int pop() {
-    if(n <= 0) {
+int pop()
+{
+    if (n <= 0)
+    {
         fprintf(stderr, "no element\n");
         exit(1);
     }
