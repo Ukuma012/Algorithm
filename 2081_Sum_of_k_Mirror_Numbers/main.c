@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// k = 2, n = 5
+
 int main(int argc, char *argv[]) {
     int k, n;
     k = atoi(argv[1]);
