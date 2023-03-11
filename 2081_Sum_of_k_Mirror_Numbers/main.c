@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 
     while (count != n)
     {
-
         char s[4096];
         snprintf(s, 4096, "%d", target);
 
