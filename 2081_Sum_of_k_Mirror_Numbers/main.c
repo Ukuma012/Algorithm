@@ -4,28 +4,40 @@
 
 // k = 2, n = 5
 
-int main(int argc, char *argv[]) {
-    int k, n;
-    k = atoi(argv[1]);
-    n = atoi(argv[2]);
+int main(int argc, char *argv[])
+{
+    int count = 0;
+    int target = 1;
+    int n;
+    n = atoi(argv[1]);
 
-    char s[100] = "1222341";
-    int i = 0;
-    int j = strlen(s) -1;
-    while(1) {
-        if(i == j) {
-            break;
+    while (count != n)
+    {
+
+        char s[4096];
+        snprintf(s, 4096, "%d", target);
+
+        int i = 0;
+        int j = strlen(s) - 1;
+        while (1)
+        {
+            if (i == j || i > j)
+            {
+                printf("%d\n", target);
+                count++;
+                break;
+            }
+
+            if (s[i++] == s[j--])
+            {
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
-        if(s[i++] == s[j--]) {
-            printf("%s\n", "yes");
-            continue;
-        } else {
-            printf("%s\n", "No");
-            exit(1);
-        }
+        target++;
     }
-
-    printf("base is %d\n", k);
-    printf("%d times\n", n);
-    exit(1);
+    return 0;
 }
