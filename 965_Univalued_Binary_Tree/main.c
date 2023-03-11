@@ -2,8 +2,8 @@
 
 struct TreeNode {
     int value;
-    struct TreeNode *right;
     struct TreeNode *left;
+    struct TreeNode *right;
 };
 
 int main(int argc, char *argv[]) {
