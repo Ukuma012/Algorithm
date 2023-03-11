@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 {
     int count = 0;
     int target = 1;
+    long result = 0;
     int n;
     n = atoi(argv[1]);
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
         {
             if (i == j || i > j)
             {
+                result = result + target;
                 printf("%d\n", target);
                 count++;
                 break;
@@ -39,5 +41,7 @@ int main(int argc, char *argv[])
         }
         target++;
     }
+
+    printf("%ld\n", result);
     return 0;
 }
