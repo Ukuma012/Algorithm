@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     printf("%s\n", "Hello");
     insert(1);
     insert(2);
-    insert(3);
+    insert(3); // 表示されない！
     // root = NULL;
     // for(int i = 1; i < argc; i++) {
     //     int n = *argv[i] - '0';
