@@ -5,19 +5,19 @@
 
 int main(int argc, char *argv[]) {
     int n = 0;
-    int pos0 = 0;
-    int pos1 = 0;
+    int lastpos0 = 0;
+    int firstpos1 = 0;
     char *text = argv[1];
     char *pattern = argv[2];
 
     while(text[n] != '\0') {
         if(text[n] == pattern[0]) {
-            pos0 = n;
+            lastpos0 = n;
         }
         n++;
     }
 
-    printf("%d\n", pos0);
+    printf("%d\n", lastpos0);
 
     return 0;
 }
