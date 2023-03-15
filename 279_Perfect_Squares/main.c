@@ -7,8 +7,15 @@
 #define TABLE_SIZE 10000
 
 int main(int argc, char *argv[]) {
-    int n = atoi(argv[1]);
-    
-    printf("%d\n", n);
+    int j = 0;
+    int square[100];
+    for(int i = 1; i <= 100; i++) {
+        square[j] = i*i;
+        j++;
+    }
+
+
+    // int n = atoi(argv[1]);
+    // printf("%d\n", n);
     return 0;
 }
