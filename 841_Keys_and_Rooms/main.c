@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // input: rooms.length
 
@@ -7,6 +8,13 @@ int pointer = 0;
 
 int main(int argc, char *argv[])
 {
+    int c;
+    if((c = getchar()) == EOF) {
+        fprintf(stderr, "getchar failed\n");
+        exit(1);
+    }
+    int roomlength = c - 48;
+    printf("%d\n", roomlength);
 
     return 0;
 }
