@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     intervals[3].end = 18;
     intervals[3].check = true;
 
+    // count ではない
     while (count != (3 - 1))
     {
         previous = 0;
@@ -44,7 +45,6 @@ int main(int argc, char *argv[])
         else if (intervals[previous].end >= intervals[current].start && intervals[previous].end <= intervals[current].end) {
             intervals[previous].end = intervals[current].end;
             intervals[current].check = false;
-            previous++;
             current++;
             count++;
             continue;
