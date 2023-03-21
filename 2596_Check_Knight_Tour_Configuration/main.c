@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "number of col need\n");
         exit(1);
     }
+
     int n = *argv[1] - 48;
     int grid[n][n];
     char str[BUF];
@@ -18,11 +19,12 @@ int main(int argc, char *argv[])
     {
         for (int j = 0; j < n; j++)
         {
-                int c = 0;
-                if(fgets(str, BUF, stdin) != NULL) {
-                    c = atoi(str);
-                }
-                grid[i][j] = c;
+            int c = 0;
+            if (fgets(str, BUF, stdin) != NULL)
+            {
+                c = atoi(str);
+            }
+            grid[i][j] = c;
         }
     }
 
@@ -34,6 +36,61 @@ int main(int argc, char *argv[])
         }
         printf("\n");
     }
+
+    int row = 0;
+    int col = 0;
+    int current = grid[row][col];
+
+    while (current != n * n)
+    {
+        if (grid[row += 1][col += 2] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        // else if (grid[row += 2][col += 1] == (current + 1))
+        else if(grid[row +=1][col -=1] == (current+1))
+        {
+            printf("%d %d\n", row, col);
+            current++;
+            continue;
+        }
+        else if (grid[row -= 1][col += 2] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        else if (grid[row -= 2][col += 1] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        else if (grid[row += 2][col -= 1] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        else if (grid[row += 1][col -= 2] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        else if (grid[row -= 1][col -= 2] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+        else if (grid[row -= 2][col -= 1] == (current + 1))
+        {
+            current++;
+            continue;
+        }
+
+        printf("%s\n", "Failed!");
+        exit(0);
+    }
+
+    printf("%s\n", "Succeeded");
 
     return 0;
 }
