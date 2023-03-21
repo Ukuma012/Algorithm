@@ -41,15 +41,14 @@ int main(int argc, char *argv[])
     int col = 0;
     int current = grid[row][col];
 
-    while (current != n * n)
+    while (current != (n * n - 1))
     {
         if (grid[row += 1][col += 2] == (current + 1))
         {
             current++;
             continue;
         }
-        // else if (grid[row += 2][col += 1] == (current + 1))
-        else if(grid[row +=1][col -=1] == (current+1))
+        else if (grid[row += 2][col += 1] == (current + 1))
         {
             printf("%d %d\n", row, col);
             current++;
