@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 struct interval
@@ -14,9 +15,14 @@ struct interval intervals[10000];
 
 int main(int argc, char *argv[])
 {
-    int count = 0;
-    int previous;
-    int current;
+    if(argc != 2) {
+        fprintf(stderr, "number!\n");
+        exit(1);
+    }
+    int number = *argv[1] - 48;
+    
+    int previous = 0;;
+    int current = 1;
     intervals[0].start = 1;
     intervals[0].end = 3;
     intervals[0].check = true;
@@ -30,34 +36,31 @@ int main(int argc, char *argv[])
     intervals[3].end = 18;
     intervals[3].check = true;
 
-    // count ではない
-    while (count != (3 - 1))
+    // intervals[0].start = 1;
+    // intervals[0].end = 4;
+    // intervals[0].check = true;
+    // intervals[1].start = 4;
+    // intervals[1].end = 8;
+    // intervals[1].check = true;
+
+    while (current != number)
     {
-        previous = 0;
-        current = 1;
         if (intervals[previous].end < intervals[current].start)
         {
             previous++;
             current++;
-            count++;
-            continue;
         }
         else if (intervals[previous].end >= intervals[current].start && intervals[previous].end <= intervals[current].end) {
             intervals[previous].end = intervals[current].end;
             intervals[current].check = false;
             current++;
-            count++;
-            continue;
         } else if(intervals[previous].end >= intervals[current].end) {
             intervals[current].check = false;
-            previous++;
             current++;
-            count++;
-            continue;
         }
     }
 
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < number; i++) {
         if(intervals[i].check == false) {
             continue;
         }
