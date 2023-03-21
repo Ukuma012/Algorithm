@@ -11,7 +11,8 @@ struct interval
 
 struct interval intervals[10000];
 
-// sorting on start
+// @TODO sorting on start
+// @TODO input
 
 int main(int argc, char *argv[])
 {
