@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // input: rooms.length
 
@@ -7,35 +8,57 @@ int stack[1000];
 int pointer = 0;
 int counter = 0;
 
-void check();
-void push(int );
+bool check();
+void push(int);
 int pop();
 
 int main(int argc, char *argv[])
 {
-    int room = 0;
-    int c;
-    if((c = getchar()) == EOF) {
-        fprintf(stderr, "getchar failed\n");
+    if (argc != 2)
+    {
+        fprintf(stderr, "argument failed\n");
         exit(1);
     }
-    int roomlength = c - 48;
-    printf("%d\n", roomlength);
-    push(1);
-    check();
 
+    int roomlength = *argv[1] - 48;
+    printf("%d\n", roomlength);
+
+    while (counter != (roomlength-1))
+    {
+        int n;
+        while ((n = getchar()) != EOF)
+        {
+            if (n == '\n')
+            {
+                break;
+            }
+            int item = n - 48;
+            push(item);
+        }
+        if (check())
+        {
+            continue;
+        } else {
+            fprintf(stderr, "failed\n");
+            exit(1);
+        }
+    }
+    printf("%s\n", "success\n");
     return 0;
 }
 
-void check() {
-    while(pointer != 0) {
+bool check()
+{
+    while (pointer != 0)
+    {
         int n = pop();
-        if(n == ++counter) {
-            printf("%s\n", "Success from check\n");
-            exit(0);
+        if (n == (counter + 1))
+        {
+            counter++;
+            return true;
         }
     }
-    printf("%s\n", "Failed\n");
+    return false;
 }
 
 void push(int x)
