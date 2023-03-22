@@ -44,5 +44,6 @@ int main(int argc, char *argv[])
     {
         printf("%d ", nums2[i]);
     }
+    printf("\n");
     exit(0);
 }
