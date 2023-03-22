@@ -45,5 +45,27 @@ int main(int argc, char *argv[])
         printf("%d ", nums2[i]);
     }
     printf("\n");
+
+    int dominant = 0;
+    int dominantNumber;
+    int involved = 0;
+    int counts[n+1];
+    int answer = 0;
+    for(int i = 0; i < n; i++) {
+        if(nums1[i] == nums2[i]) {
+            answer += i;
+            counts[nums1[i]]++;
+            if(counts[nums1[i]] > dominant) {
+                dominant = counts[nums1[i]];
+                dominantNumber = nums1[i];
+            }
+            involved++;
+        }
+    }
+    printf("%d\n", answer);
+    printf("%d\n", involved);
+    printf("%d\n", dominantNumber);
+    printf("%d\n", dominant);
+
     exit(0);
 }
