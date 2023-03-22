@@ -3,6 +3,8 @@
 
 #define BUF 256
 
+void init_counts(int *);
+
 int main(int argc, char *argv[])
 {
 
@@ -49,23 +51,30 @@ int main(int argc, char *argv[])
     int dominant = 0;
     int dominantNumber;
     int involved = 0;
-    int counts[n+1];
+    int counts[10000];
+    init_counts(counts);
     int answer = 0;
-    for(int i = 0; i < n; i++) {
-        if(nums1[i] == nums2[i]) {
+    for (int i = 0; i < n; i++)
+    {
+        if (nums1[i] == nums2[i])
+        {
             answer += i;
             counts[nums1[i]]++;
-            if(counts[nums1[i]] > dominant) {
+            if (counts[nums1[i]] > dominant)
+            {
                 dominant = counts[nums1[i]];
                 dominantNumber = nums1[i];
             }
             involved++;
         }
     }
-    printf("%d\n", answer);
-    printf("%d\n", involved);
-    printf("%d\n", dominantNumber);
-    printf("%d\n", dominant);
-
     exit(0);
+}
+
+void init_counts(int *counts)
+{
+    for (int i = 0; i < 10000; i++)
+    {
+        counts[i] = 0;
+    }
 }
