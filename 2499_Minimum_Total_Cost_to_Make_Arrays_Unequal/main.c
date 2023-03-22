@@ -68,6 +68,29 @@ int main(int argc, char *argv[])
             involved++;
         }
     }
+    if (dominant > (involved / 2))
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (nums1[i] != nums2[i] && nums1[i] != dominantNumber && nums2[i] != dominantNumber)
+            {
+                counts[nums1[i]]++;
+                answer += i;
+                if (dominant < (involved / 2))
+                {
+                    printf("%d\n", answer);
+                    exit(0);
+                }
+            }
+        }
+        printf("%s\n", "Failed");
+        exit(0);
+    }
+    else
+    {
+        printf("%d\n", answer);
+        exit(0);
+    }
     exit(0);
 }
 
