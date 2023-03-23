@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct property {
+    int attack;
+    int defence;
+};
+
 // stack
 
 int main(int argc, char *argv[])
@@ -12,7 +17,7 @@ int main(int argc, char *argv[])
     }
 
     int n = *argv[1] - 48;
-    int properties[2 * n];
+    int properties[n];
     char str[2046];
 
     for (int i = 0; i < (2 * n); i++)
