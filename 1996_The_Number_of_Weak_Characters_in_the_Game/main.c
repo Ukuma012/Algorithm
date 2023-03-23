@@ -6,6 +6,7 @@ struct property {
     int defense;
 };
 
+// sort?
 // stack
 
 int main(int argc, char *argv[])
