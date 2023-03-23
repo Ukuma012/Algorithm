@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// stack
+
 int main(int argc, char *argv[])
 {
     if (argc != 2)
