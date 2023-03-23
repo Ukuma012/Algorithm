@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct property {
+typedef struct {
     int attack;
     int defense;
-};
+} property;
 
 // sort?
 // stack
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     }
 
     int n = *argv[1] - 48;
-    struct property properties[n];
+    property properties[n];
     char str_attack[2046];
     char str_defense[2046];
 
