@@ -6,7 +6,7 @@ typedef struct {
     int defense;
 } property;
 
-// sort?
+// qsort
 // stack
 
 int main(int argc, char *argv[])
