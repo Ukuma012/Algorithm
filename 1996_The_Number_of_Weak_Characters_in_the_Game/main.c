@@ -9,6 +9,14 @@ typedef struct {
 // qsort
 // stack
 
+int compar(const void* a, const void* b) {
+    if (((property*)a)->attack >= ((property*)b)->attack) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -36,6 +44,8 @@ int main(int argc, char *argv[])
             }
             properties[i].defense = d;
         }
+
+    qsort(properties, n, sizeof(property), compar);
 
     for (int i = 0; i < n; i++)
     {
