@@ -1,15 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
 
-int main(int argc, char *argv[]) {
+struct TreeNode *createNode(int value)
+{
+    struct TreeNode *p;
+    if ((p = malloc(sizeof(struct TreeNode))) == NULL)
+    {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
 
-    if(argc != 2) {
+    p->val = value;
+    p->left = NULL;
+    p->right = NULL;
+
+    return p;
+}
+
+int main(int argc, char *argv[])
+{
+
+    if (argc != 2)
+    {
         fprintf(stderr, "argument!");
         exit(0);
     }
