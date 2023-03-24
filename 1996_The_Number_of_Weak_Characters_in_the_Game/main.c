@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     property properties[n];
     char str_attack[2046];
     char str_defense[2046];
+    int count = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -53,9 +54,15 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < n; i++)
     {
-        printf("%d ", properties[i].attack);
-        printf("%d ", properties[i].defense);
+        for(int j = i+1; j < n; j++) {
+            if(properties[i].attack == properties[j].attack) {
+                continue;
+            }
+            if(properties[i].defense < properties[j].defense) {
+                count++;
+            }
+        }
     }
-    printf("\n");
+    printf("%d\n", count);
     exit(0);
 }
