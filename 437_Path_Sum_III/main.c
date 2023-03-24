@@ -4,6 +4,7 @@
 struct TreeNode
 {
     int val;
+    int sum;
     struct TreeNode *left;
     struct TreeNode *right;
 };
