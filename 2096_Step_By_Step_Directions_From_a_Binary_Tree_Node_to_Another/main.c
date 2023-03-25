@@ -7,6 +7,9 @@ struct TreeNode {
     struct TreeNode *left;
 };
 
+char startlog[15];
+char dstlog[15];
+
 struct TreeNode* createTree(int val) {
     struct TreeNode *new;
     if((new = malloc(sizeof(struct TreeNode))) == NULL) {
