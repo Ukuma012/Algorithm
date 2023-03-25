@@ -48,6 +48,15 @@ void insertLeft(struct TreeNode *node, int val) {
 }
 
 int main(int argc, char *argv[]) {
+
+    if(argc != 3) {
+        fprintf(stderr, "start value, dst value!");
+        exit(1);
+    }
+
+    int startValue = atoi(argv[1]);
+    int dstValue = atoi(argv[2]);
+
     // root = [5,1,2,3,null,6,4]
     struct TreeNode *root = createTree(5);
     insertLeft(root, 1);
@@ -57,7 +66,5 @@ int main(int argc, char *argv[]) {
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
 
-    printf("%d\n", root->val);
-    printf("%d\n", root->right->right->val);
     exit(0);
 }
