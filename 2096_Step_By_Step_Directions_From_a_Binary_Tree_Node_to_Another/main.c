@@ -50,18 +50,23 @@ void insertLeft(struct TreeNode *node, int val) {
     node->left = p;
 }
 
-void dfs(struct TreeNode *node, int n) {
+void dfs(struct TreeNode *node, int n, char c) {
     if(node == NULL) {
         return;
     }
 
-    if(node->val == n) {
-        printf("%s\n", "I found it!");
-        return;
+    if(c == 'L') {
+        printf("%s\n", "left");
+    } else if(c == 'R') {
+        printf("%s\n", "right");
     }
 
-    dfs(node->left, n);
-    dfs(node->right, n);
+    if(node->val == n) {
+        printf("%s\n", "I found it!");
+    }
+
+    dfs(node->left, n, 'L');
+    dfs(node->right, n, 'R');
 
     return;
 }
@@ -85,7 +90,7 @@ int main(int argc, char *argv[]) {
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
 
-    dfs(root, dstValue);
+    dfs(root, dstValue, 'N');
 
     exit(0);
 }
