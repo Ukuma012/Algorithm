@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int answer = 0;
+
 struct TreeNode
 {
     int val;
@@ -54,6 +56,19 @@ void insertright(struct TreeNode *node, int value)
     new->val = value;
 
     node->right = new;
+}
+
+void DFS(struct TreeNode* node, int targetsum) {
+    if(node == NULL) {
+        return;
+    }
+
+    if(node->val == targetsum) {
+        answer++;
+    }
+
+    DFS(node->left, (targetsum - node->val));
+    DFS(node->right, (targetsum - node->val));
 }
 
 int main(int argc, char *argv[])
