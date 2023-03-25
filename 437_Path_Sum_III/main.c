@@ -71,6 +71,14 @@ void DFS(struct TreeNode* node, int targetsum) {
     DFS(node->right, (targetsum - node->val));
 }
 
+void count(struct TreeNode* node, int targetSum) {
+    if(node != NULL) {
+        DFS(node, targetSum);
+        count(node->left, targetSum);
+        count(node->right, targetSum);
+    }
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -93,6 +101,10 @@ int main(int argc, char *argv[])
     insertright(root->left->left, -2);
 
     insertright(root->left->right, 1);
+
+    count(root, targetSum);
+    printf("%d\n", answer);
+
 
     exit(0);
 }
