@@ -1,18 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
     struct TreeNode *right;
     struct TreeNode *left;
 };
 
+int start = 0;
+int dst = 0;
 char startlog[15];
 char dstlog[15];
+int startflag = 0;
+int dstflag = 0;
 
-struct TreeNode* createTree(int val) {
+struct TreeNode *createTree(int val)
+{
     struct TreeNode *new;
-    if((new = malloc(sizeof(struct TreeNode))) == NULL) {
+    if ((new = malloc(sizeof(struct TreeNode))) == NULL)
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
@@ -24,9 +31,11 @@ struct TreeNode* createTree(int val) {
     return new;
 }
 
-void insertRight(struct TreeNode *node, int val) {
+void insertRight(struct TreeNode *node, int val)
+{
     struct TreeNode *p;
-    if(((p = malloc(sizeof(struct TreeNode))) == NULL)) {
+    if (((p = malloc(sizeof(struct TreeNode))) == NULL))
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
@@ -37,9 +46,11 @@ void insertRight(struct TreeNode *node, int val) {
     node->right = p;
 }
 
-void insertLeft(struct TreeNode *node, int val) {
+void insertLeft(struct TreeNode *node, int val)
+{
     struct TreeNode *p;
-    if(((p = malloc(sizeof(struct TreeNode))) == NULL)) {
+    if (((p = malloc(sizeof(struct TreeNode))) == NULL))
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
@@ -50,30 +61,81 @@ void insertLeft(struct TreeNode *node, int val) {
     node->left = p;
 }
 
-void dfs(struct TreeNode *node, int n, char c) {
-    if(node == NULL) {
+void start_dfs(struct TreeNode *node, int n, char c)
+{
+    if (startflag == 0)
+    {
+        if (node == NULL)
+        {
+            return;
+        }
+
+        if (c == 'L')
+        {
+            startlog[start++] = 'L';
+        }
+        else if (c == 'R')
+        {
+            startlog[start++] = 'R';
+        }
+
+        if (node->val == n)
+        {
+            printf("%s\n", "[start]I found it!");
+            startlog[start] = 'e';
+            startflag = 1;
+        }
+
+        start_dfs(node->left, n, 'L');
+        start_dfs(node->right, n, 'R');
+    }
+    else
+    {
         return;
     }
-
-    if(c == 'L') {
-        printf("%s\n", "left");
-    } else if(c == 'R') {
-        printf("%s\n", "right");
-    }
-
-    if(node->val == n) {
-        printf("%s\n", "I found it!");
-    }
-
-    dfs(node->left, n, 'L');
-    dfs(node->right, n, 'R');
-
     return;
 }
 
-int main(int argc, char *argv[]) {
+void dst_dfs(struct TreeNode *node, int n, char c)
+{
+    if (dstflag == 0)
+    {
+        if (node == NULL)
+        {
+            return;
+        }
 
-    if(argc != 3) {
+        if (c == 'L')
+        {
+            dstlog[dst++] = 'L';
+        }
+        else if (c == 'R')
+        {
+            dstlog[dst++] = 'R';
+        }
+
+        if (node->val == n)
+        {
+            printf("%s\n", "[dst]I found it!");
+            dstlog[dst] = 'e';
+            dstflag = 1;
+        }
+
+        dst_dfs(node->left, n, 'L');
+        dst_dfs(node->right, n, 'R');
+    }
+    else
+    {
+        return;
+    }
+    return;
+}
+
+int main(int argc, char *argv[])
+{
+
+    if (argc != 3)
+    {
         fprintf(stderr, "start value, dst value!");
         exit(1);
     }
@@ -90,7 +152,28 @@ int main(int argc, char *argv[]) {
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
 
-    dfs(root, dstValue, 'N');
+    start_dfs(root, startValue, 'N');
+    dst_dfs(root, dstValue, 'N');
+
+    for (int i = 0; i < 15; i++)
+    {
+        if(startlog[i] == 'e') {
+            printf("%s\n", "end");
+            break;
+        }
+        printf("%c\n", startlog[i]);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < 15; i++)
+    {
+        if(dstlog[i] == 'e') {
+            printf("%s\n", "end");
+            break;
+        }
+        printf("%c\n", dstlog[i]);
+    }
 
     exit(0);
 }
