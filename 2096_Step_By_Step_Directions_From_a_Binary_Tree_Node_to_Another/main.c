@@ -47,6 +47,22 @@ void insertLeft(struct TreeNode *node, int val) {
     node->left = p;
 }
 
+void dfs(struct TreeNode *node, int n) {
+    if(node == NULL) {
+        return;
+    }
+
+    if(node->val == n) {
+        printf("%s\n", "I found it!");
+        return;
+    }
+
+    dfs(node->left, n);
+    dfs(node->right, n);
+
+    return;
+}
+
 int main(int argc, char *argv[]) {
 
     if(argc != 3) {
@@ -65,6 +81,8 @@ int main(int argc, char *argv[]) {
 
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
+
+    dfs(root, dstValue);
 
     exit(0);
 }
