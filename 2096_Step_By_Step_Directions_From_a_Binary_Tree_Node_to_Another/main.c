@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 struct TreeNode
 {
@@ -61,74 +62,60 @@ void insertLeft(struct TreeNode *node, int val)
     node->left = p;
 }
 
-void start_dfs(struct TreeNode *node, int n, char c)
+bool start_dfs(struct TreeNode *node, int n)
 {
-    if (startflag == 0)
+
+    if (node->val == n)
     {
-        if (node == NULL)
-        {
-            return;
-        }
+        return true;
+    }
 
-        if (c == 'L')
-        {
-            startlog[start++] = 'L';
-        }
-        else if (c == 'R')
-        {
-            startlog[start++] = 'R';
-        }
+    if (node->left && start_dfs(node->left, n))
+    {
+        startlog[start++] = 'L';
+    }
+    else if (node->right && start_dfs(node->right, n))
+    {
+        startlog[start++] = 'R';
+    }
 
-        if (node->val == n)
-        {
-            // printf("%s\n", "[start]I found it!");
-            startlog[start] = 'e';
-            startflag = 1;
-        }
-
-        start_dfs(node->left, n, 'L');
-        start_dfs(node->right, n, 'R');
+    if (start != 0)
+    {
+        startlog[start] = 'e';
+        return true;
     }
     else
     {
-        return;
+        return false;
     }
-    return;
 }
 
-void dst_dfs(struct TreeNode *node, int n, char c)
+bool dst_dfs(struct TreeNode *node, int n)
 {
-    if (dstflag == 0)
+
+    if (node->val == n)
     {
-        if (node == NULL)
-        {
-            return;
-        }
+        return true;
+    }
 
-        if (c == 'L')
-        {
-            dstlog[dst++] = 'L';
-        }
-        else if (c == 'R')
-        {
-            dstlog[dst++] = 'R';
-        }
+    if (node->left && dst_dfs(node->left, n))
+    {
+        dstlog[dst++] = 'L';
+    }
+    else if (node->right && dst_dfs(node->right, n))
+    {
+        dstlog[dst++] = 'R';
+    }
 
-        if (node->val == n)
-        {
-            // printf("%s\n", "[dst]I found it!");
-            dstlog[dst] = 'e';
-            dstflag = 1;
-        }
-
-        dst_dfs(node->left, n, 'L');
-        dst_dfs(node->right, n, 'R');
+    if (dst != 0)
+    {
+        dstlog[dst] = 'e';
+        return true;
     }
     else
     {
-        return;
+        return false;
     }
-    return;
 }
 
 int main(int argc, char *argv[])
@@ -152,43 +139,43 @@ int main(int argc, char *argv[])
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
 
-    start_dfs(root, startValue, 'N');
-    dst_dfs(root, dstValue, 'N');
+    start_dfs(root, startValue);
+    dst_dfs(root, dstValue);
 
-    for(int i = 0; i < 15; i++) {
-        if(startlog[i] == dstlog[i]) {
-            continue;
-        } else if(startlog[i] != dstlog[i] && startlog[i] == 'e') {
-            for(int j = i; j < 15; j++) {
-                if(dstlog[j] == 'e') {
-                    break;
-                }
-                printf("%c", dstlog[j]);
-            }
-        } else if(startlog[i] != dstlog[i] && dstlog[i] == 'e') {
-            for(int j = i; j < 15; j++) {
-                if(startlog[j] == 'e') {
-                    break;
-                }
-                printf("%s", "U");
-            }
-        } else if(startlog[i] != dstlog[i]) {
-            for(int j = i; j < 15; j++) {
-                if(startlog[j] == 'e') {
-                    break;
-                }
-                printf("%s", "U");
-            }
-            for(int h = i; h < 15; h++) {
-                if(dstlog[h] == 'e') {
-                    break;
-                }
-                printf("%c", dstlog[h]);
-            }
-        }
-    }
+    // for(int i = 0; i < 15; i++) {
+    //     if(startlog[i] == dstlog[i]) {
+    //         continue;
+    //     } else if(startlog[i] != dstlog[i] && startlog[i] == 'e') {
+    //         for(int j = i; j < 15; j++) {
+    //             if(dstlog[j] == 'e') {
+    //                 break;
+    //             }
+    //             printf("%c", dstlog[j]);
+    //         }
+    //     } else if(startlog[i] != dstlog[i] && dstlog[i] == 'e') {
+    //         for(int j = i; j < 15; j++) {
+    //             if(startlog[j] == 'e') {
+    //                 break;
+    //             }
+    //             printf("%s", "U");
+    //         }
+    //     } else if(startlog[i] != dstlog[i]) {
+    //         for(int j = i; j < 15; j++) {
+    //             if(startlog[j] == 'e') {
+    //                 break;
+    //             }
+    //             printf("%s", "U");
+    //         }
+    //         for(int h = i; h < 15; h++) {
+    //             if(dstlog[h] == 'e') {
+    //                 break;
+    //             }
+    //             printf("%c", dstlog[h]);
+    //         }
+    //     }
+    // }
 
     printf("\n");
-    
+
     exit(0);
 }
