@@ -114,8 +114,10 @@ bool dst_dfs(struct TreeNode *node, int n)
     }
 }
 
-void init() {
-    for(int i = 0; i < 15; i++) {
+void init()
+{
+    for (int i = 0; i < 15; i++)
+    {
         startlog[i] = 'N';
         dstlog[i] = 'N';
     }
@@ -150,38 +152,48 @@ int main(int argc, char *argv[])
     int start = 0;
     int dst = 0;
 
-    for(int i = 0; i < 15; i++) {
-        if(startlog[i] != 'N') {
+    for (int i = 0; i < 15; i++)
+    {
+        if (startlog[i] != 'N')
+        {
             start = i;
             break;
-        } else {
+        }
+        else
+        {
             continue;
         }
     }
 
-    for(int j = 0; j < 15; j++) {
-        if(dstlog[j] != 'N') {
+    for (int j = 0; j < 15; j++)
+    {
+        if (dstlog[j] != 'N')
+        {
             dst = j;
             break;
-        } else {
+        }
+        else
+        {
             continue;
         }
     }
 
-    while(dst < 15 && start < 15 && startlog[start] == dstlog[dst]) {
+    while (dst < 15 && start < 15 && startlog[start] == dstlog[dst])
+    {
         start++;
         dst++;
     }
 
-    for(int i = start; i < 15; i++) {
+    for (int i = start; i < 15; i++)
+    {
         printf("%c", 'U');
     }
-    for(int j = dst; j < 15; j++) {
+    for (int j = dst; j < 15; j++)
+    {
         printf("%c", dstlog[j]);
     }
 
     printf("\n");
-
 
     exit(0);
 }
