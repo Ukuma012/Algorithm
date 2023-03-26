@@ -81,7 +81,7 @@ void start_dfs(struct TreeNode *node, int n, char c)
 
         if (node->val == n)
         {
-            printf("%s\n", "[start]I found it!");
+            // printf("%s\n", "[start]I found it!");
             startlog[start] = 'e';
             startflag = 1;
         }
@@ -116,7 +116,7 @@ void dst_dfs(struct TreeNode *node, int n, char c)
 
         if (node->val == n)
         {
-            printf("%s\n", "[dst]I found it!");
+            // printf("%s\n", "[dst]I found it!");
             dstlog[dst] = 'e';
             dstflag = 1;
         }
@@ -155,25 +155,40 @@ int main(int argc, char *argv[])
     start_dfs(root, startValue, 'N');
     dst_dfs(root, dstValue, 'N');
 
-    for (int i = 0; i < 15; i++)
-    {
-        if(startlog[i] == 'e') {
-            printf("%s\n", "end");
-            break;
+    for(int i = 0; i < 15; i++) {
+        if(startlog[i] == dstlog[i]) {
+            continue;
+        } else if(startlog[i] != dstlog[i] && startlog[i] == 'e') {
+            for(int j = i; j < 15; j++) {
+                if(dstlog[j] == 'e') {
+                    break;
+                }
+                printf("%c", dstlog[j]);
+            }
+        } else if(startlog[i] != dstlog[i] && dstlog[i] == 'e') {
+            for(int j = i; j < 15; j++) {
+                if(startlog[j] == 'e') {
+                    break;
+                }
+                printf("%s", "U");
+            }
+        } else if(startlog[i] != dstlog[i]) {
+            for(int j = i; j < 15; j++) {
+                if(startlog[j] == 'e') {
+                    break;
+                }
+                printf("%s", "U");
+            }
+            for(int h = i; h < 15; h++) {
+                if(dstlog[h] == 'e') {
+                    break;
+                }
+                printf("%c", dstlog[h]);
+            }
         }
-        printf("%c\n", startlog[i]);
     }
 
     printf("\n");
-
-    for (int i = 0; i < 15; i++)
-    {
-        if(dstlog[i] == 'e') {
-            printf("%s\n", "end");
-            break;
-        }
-        printf("%c\n", dstlog[i]);
-    }
-
+    
     exit(0);
 }
