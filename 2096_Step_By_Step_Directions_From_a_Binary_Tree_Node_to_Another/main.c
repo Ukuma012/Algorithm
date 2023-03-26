@@ -9,12 +9,10 @@ struct TreeNode
     struct TreeNode *left;
 };
 
-int start = 0;
-int dst = 0;
+int start = 14;
+int dst = 14;
 char startlog[15];
 char dstlog[15];
-int startflag = 0;
-int dstflag = 0;
 
 struct TreeNode *createTree(int val)
 {
@@ -72,16 +70,15 @@ bool start_dfs(struct TreeNode *node, int n)
 
     if (node->left && start_dfs(node->left, n))
     {
-        startlog[start++] = 'L';
+        startlog[start--] = 'L';
     }
     else if (node->right && start_dfs(node->right, n))
     {
-        startlog[start++] = 'R';
+        startlog[start--] = 'R';
     }
 
-    if (start != 0)
+    if (start != 14)
     {
-        startlog[start] = 'e';
         return true;
     }
     else
@@ -100,21 +97,27 @@ bool dst_dfs(struct TreeNode *node, int n)
 
     if (node->left && dst_dfs(node->left, n))
     {
-        dstlog[dst++] = 'L';
+        dstlog[dst--] = 'L';
     }
     else if (node->right && dst_dfs(node->right, n))
     {
-        dstlog[dst++] = 'R';
+        dstlog[dst--] = 'R';
     }
 
-    if (dst != 0)
+    if (dst != 14)
     {
-        dstlog[dst] = 'e';
         return true;
     }
     else
     {
         return false;
+    }
+}
+
+void init() {
+    for(int i = 0; i < 15; i++) {
+        startlog[i] = 'N';
+        dstlog[i] = 'N';
     }
 }
 
@@ -139,43 +142,46 @@ int main(int argc, char *argv[])
     insertLeft(root->right, 6);
     insertRight(root->right, 4);
 
+    init();
+
     start_dfs(root, startValue);
     dst_dfs(root, dstValue);
 
-    // for(int i = 0; i < 15; i++) {
-    //     if(startlog[i] == dstlog[i]) {
-    //         continue;
-    //     } else if(startlog[i] != dstlog[i] && startlog[i] == 'e') {
-    //         for(int j = i; j < 15; j++) {
-    //             if(dstlog[j] == 'e') {
-    //                 break;
-    //             }
-    //             printf("%c", dstlog[j]);
-    //         }
-    //     } else if(startlog[i] != dstlog[i] && dstlog[i] == 'e') {
-    //         for(int j = i; j < 15; j++) {
-    //             if(startlog[j] == 'e') {
-    //                 break;
-    //             }
-    //             printf("%s", "U");
-    //         }
-    //     } else if(startlog[i] != dstlog[i]) {
-    //         for(int j = i; j < 15; j++) {
-    //             if(startlog[j] == 'e') {
-    //                 break;
-    //             }
-    //             printf("%s", "U");
-    //         }
-    //         for(int h = i; h < 15; h++) {
-    //             if(dstlog[h] == 'e') {
-    //                 break;
-    //             }
-    //             printf("%c", dstlog[h]);
-    //         }
-    //     }
-    // }
+    int start = 0;
+    int dst = 0;
+
+    for(int i = 0; i < 15; i++) {
+        if(startlog[i] != 'N') {
+            start = i;
+            break;
+        } else {
+            continue;
+        }
+    }
+
+    for(int j = 0; j < 15; j++) {
+        if(dstlog[j] != 'N') {
+            dst = j;
+            break;
+        } else {
+            continue;
+        }
+    }
+
+    while(dst < 15 && start < 15 && startlog[start] == dstlog[dst]) {
+        start++;
+        dst++;
+    }
+
+    for(int i = start; i < 15; i++) {
+        printf("%c", 'U');
+    }
+    for(int j = dst; j < 15; j++) {
+        printf("%c", dstlog[j]);
+    }
 
     printf("\n");
+
 
     exit(0);
 }
