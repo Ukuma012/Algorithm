@@ -1,45 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
 
-struct TreeNode* generateNode(int val) {
+struct TreeNode *root = NULL;
+
+void insertkey(int key)
+{
+    struct TreeNode **node;
+    node = &root;
+    while (*node != NULL)
+    {
+        if ((*node)->val < key)
+        {
+            node = &(*node)->right;
+        }
+        else if ((*node)->val > key)
+        {
+            node = &(*node)->left;
+        }
+    }
     struct TreeNode *new;
-    if((new = malloc(sizeof(struct TreeNode))) == NULL) {
+    if ((new = malloc(sizeof(struct TreeNode))) == NULL)
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
 
-    new->val = val;
+    new->val = key;
     new->left = NULL;
     new->right = NULL;
 
-    return new;
+    *node = new;
 }
 
-void insertleft(struct TreeNode* node, int val) {
-    struct TreeNode *p;
-    p = generateNode(val);
+int main(int argc, char *argv[])
+{
+    if ((root = malloc(sizeof(struct TreeNode))) == NULL)
+    {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    root->val = 4;
+    root->left = NULL;
+    root->right = NULL;
+    insertkey(2);
 
-    node->left = p;
-}
+    printf("%d\n", root->left->val);
 
-void insertright(struct TreeNode* node, int val) {
-    struct TreeNode *p;
-    p = generateNode(val);
-
-    node->right = p;
-}
-
-int main(int argc, char *argv[]) {
-    int n = atoi(argv[1]);
-
-
-
-    printf("%d\n", n);
     exit(0);
 }
