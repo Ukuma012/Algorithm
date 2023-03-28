@@ -21,6 +21,20 @@ struct TreeNode* generateNode(int val) {
     return new;
 }
 
+void insertleft(struct TreeNode* node, int val) {
+    struct TreeNode *p;
+    p = generateNode(val);
+
+    node->left = p;
+}
+
+void insertright(struct TreeNode* node, int val) {
+    struct TreeNode *p;
+    p = generateNode(val);
+
+    node->right = p;
+}
+
 int main(int argc, char *argv[]) {
     int n = atoi(argv[1]);
 
