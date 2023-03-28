@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-    printf("%s\n", "Hello World");
+    int n = atoi(argv[1]);
+
+    printf("%d\n", n);
     exit(0);
 }
