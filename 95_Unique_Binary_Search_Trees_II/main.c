@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
+
     root->val = 1;
     root->left = NULL;
     root->right = NULL;
