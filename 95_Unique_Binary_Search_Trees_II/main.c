@@ -41,6 +41,7 @@ void insertkey(int key)
 
 int main(int argc, char *argv[])
 {
+    int n = atoi(argv[1]);
     if ((root = malloc(sizeof(struct TreeNode))) == NULL)
     {
         fprintf(stderr, "malloc failed\n");
