@@ -47,12 +47,8 @@ int main(int argc, char *argv[])
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
-    root->val = 4;
+    root->val = 1;
     root->left = NULL;
     root->right = NULL;
-    insertkey(2);
-
-    printf("%d\n", root->left->val);
-
     exit(0);
 }
