@@ -3,6 +3,11 @@
 
 #define arr_size 3
 
+int hash(char s) {
+    int n = s - 'a';
+    return n;
+}
+
 int main(int argc, char *argv[]) {
     char *arr[arr_size] = {"un", "iq", "ue"};
 
@@ -12,7 +17,7 @@ int main(int argc, char *argv[]) {
             if(s[j] == '\0') {
                 break;
             }
-            printf("%c\n", s[j]);
+            printf("%d\n", hash(s[j]));
         }
     }
 
