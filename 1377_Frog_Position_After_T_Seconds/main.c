@@ -7,7 +7,7 @@
 
 int input[edgesSize * 2] = {1, 2, 1, 3, 1, 7, 2, 4, 2, 6, 3, 5};
 int t = 2;
-int target = 7;
+int target = 4;
 
 int pointer = 0;
 int visited[edgesSize + 1];
@@ -108,7 +108,6 @@ int find(struct graph *g, int x)
         int n = pop();
         if (n == target)
         {
-            printf("%s\n", "find!");
             return 1;
         }
         else 
