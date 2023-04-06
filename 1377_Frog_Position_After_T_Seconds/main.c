@@ -79,7 +79,6 @@ void print_graph(struct graph *g)
 
 int find(struct graph *g, int x)
 {
-
     visited[x] = 1;
     struct edgenode *p;
     if ((p = malloc(sizeof(struct edgenode))) == NULL)
@@ -110,9 +109,10 @@ int find(struct graph *g, int x)
         {
             return 1;
         }
-        else 
+        else
         {
-            if(find(g, n) == 1) {
+            if (find(g, n) == 1)
+            {
                 return 1;
             }
         }
