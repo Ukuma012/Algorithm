@@ -7,11 +7,13 @@
 
 int input[edgesSize * 2] = {1, 2, 1, 3, 1, 7, 2, 4, 2, 6, 3, 5};
 int t = 2;
-int target = 4;
+int target = 5;
 
 int pointer = 0;
+int trajectory_pointer = 0;
 int visited[edgesSize + 1];
 int stack[stackSize];
+int trajectory[stackSize];
 
 struct edgenode
 {
@@ -27,6 +29,10 @@ struct graph
 void push(int x)
 {
     stack[pointer++] = x;
+}
+
+void trajectory_push(int x) {
+    trajectory[trajectory_pointer++] = x;
 }
 
 int pop()
@@ -107,12 +113,14 @@ int find(struct graph *g, int x)
         int n = pop();
         if (n == target)
         {
+            trajectory_push(n);
             return 1;
         }
         else
         {
             if (find(g, n) == 1)
             {
+                trajectory_push(n);
                 return 1;
             }
         }
@@ -138,6 +146,10 @@ int main(int argc, char *argv[])
     print_graph(g);
 
     printf("%d\n", find(g, 1));
+    for(int i = 0; i < trajectory_pointer; i++) {
+        printf("%d ", trajectory[i]);
+    }
+    printf("\n");
 
     exit(0);
 }
