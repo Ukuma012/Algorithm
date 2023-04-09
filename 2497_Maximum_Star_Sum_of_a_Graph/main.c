@@ -18,17 +18,32 @@ struct graph {
 
 void insert_edge(struct graph *g, int number, int edge, bool directed)
 {
-    struct node *p;
-    if ((p = malloc(sizeof(struct node))) == NULL)
+    struct node *p, *q, *new;
+
+    if ((new = malloc(sizeof(struct node))) == NULL)
     {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     };
 
-    p->val = vals[edge];
+    new->val = vals[edge];
+    new->next = NULL;
 
-    p->next = g->nodes[number];
-    g->nodes[number] = p;
+    p = g->nodes[number];
+    q = NULL;
+
+    while(p != NULL && new->val < p->val) {
+        q = p;
+        p = p->next;
+    }
+
+    if(q == NULL) {
+        new->next = g->nodes[number];
+        g->nodes[number] = new;
+    } else {
+        new->next = q->next;
+        q->next = new;
+    }
 
     if (directed == false)
     {
