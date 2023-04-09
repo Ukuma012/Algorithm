@@ -3,16 +3,19 @@
 #include <stdbool.h>
 
 #define valsize 7
+#define k 2
 
-int vals[valsize] = {1,2,3,4,10,-10,-20};
+int vals[valsize] = {1, 2, 3, 4, 10, -10, -20};
 int edges[12] = {0, 1, 1, 2, 1, 3, 3, 4, 3, 5, 3, 6};
 
-struct node {
+struct node
+{
     int val;
     struct node *next;
 };
 
-struct graph {
+struct graph
+{
     struct node *nodes[valsize];
 };
 
@@ -32,15 +35,19 @@ void insert_edge(struct graph *g, int number, int edge, bool directed)
     p = g->nodes[number];
     q = NULL;
 
-    while(p != NULL && new->val < p->val) {
+    while (p != NULL && new->val < p->val)
+    {
         q = p;
         p = p->next;
     }
 
-    if(q == NULL) {
+    if (q == NULL)
+    {
         new->next = g->nodes[number];
         g->nodes[number] = new;
-    } else {
+    }
+    else
+    {
         new->next = q->next;
         q->next = new;
     }
@@ -51,16 +58,19 @@ void insert_edge(struct graph *g, int number, int edge, bool directed)
     }
 }
 
-void print_graph(struct graph *g) {
+void print_graph(struct graph *g)
+{
     struct node *p;
     if ((p = malloc(sizeof(struct node))) == NULL)
     {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
-    for(int i = 0; i < valsize; i++) {
+    for (int i = 0; i < valsize; i++)
+    {
         p = g->nodes[i];
-        while(p != NULL) {
+        while (p != NULL)
+        {
             printf("%d ", p->val);
             p = p->next;
         }
@@ -68,9 +78,11 @@ void print_graph(struct graph *g) {
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
     bool directed = false;
+    int max = 0;
 
     struct graph *g;
     if ((g = malloc(sizeof(struct graph))) == NULL)
@@ -79,11 +91,39 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    for(int i = 0; i < (sizeof(edges) / sizeof(int)); i+=2) {
-        insert_edge(g, edges[i], edges[i+1], directed);
+    for (int i = 0; i < (sizeof(edges) / sizeof(int)); i += 2)
+    {
+        insert_edge(g, edges[i], edges[i + 1], directed);
     }
 
     print_graph(g);
+
+    printf("\n");
+
+    for (int i = 0; i < valsize; i++)
+    {
+        int sum = vals[i];
+        struct node *p;
+        if ((p = malloc(sizeof(struct node))) == NULL)
+        {
+            fprintf(stderr, "malloc failed\n");
+            exit(1);
+        }
+        p = g->nodes[i];
+        for (int j = 0; j < k; j++)
+        {
+            if(p == NULL) {
+                break;
+            }
+            sum += p->val;
+            p = p->next;
+        }
+        if(sum > max) {
+            max = sum;
+        }
+    }
+
+    printf("%d\n", max);
 
     exit(0);
 }
