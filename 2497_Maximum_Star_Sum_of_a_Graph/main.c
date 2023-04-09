@@ -36,6 +36,23 @@ void insert_edge(struct graph *g, int number, int edge, bool directed)
     }
 }
 
+void print_graph(struct graph *g) {
+    struct node *p;
+    if ((p = malloc(sizeof(struct node))) == NULL)
+    {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    for(int i = 0; i < valsize; i++) {
+        p = g->nodes[i];
+        while(p != NULL) {
+            printf("%d ", p->val);
+            p = p->next;
+        }
+        printf("\n");
+    }
+}
+
 int main(int argc, char *argv[]) {
 
     bool directed = false;
@@ -51,6 +68,7 @@ int main(int argc, char *argv[]) {
         insert_edge(g, edges[i], edges[i+1], directed);
     }
 
+    print_graph(g);
 
     exit(0);
 }
