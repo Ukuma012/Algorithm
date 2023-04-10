@@ -10,6 +10,9 @@ int edges[edgesize] = {0, 1, 2, 0, 4, 8, 1, 2, 3, 1, 4, 2, 2, 3, 1, 3, 4, 1};
 
 int stack_pointer = 0;
 int stack[1000];
+int visited[1000];
+int dst = 0;
+int count = 0;
 
 struct node
 {
@@ -78,6 +81,38 @@ int pop()
     return n;
 }
 
+int dfs(struct graph *g, int x)
+{
+    visited[x] = 1;
+
+    struct node *p;
+    p = g->nodes[x];
+    while (p != NULL)
+    {
+        if (visited[p->val] == 1)
+        {
+            p = p->next;
+            continue;
+        }
+        push(p->val);
+        p = p->next;
+    }
+    while(!(stack_pointer == 0)){
+        int n = pop();
+        dst += n;
+        if(dst > distanceThreshold) {
+            dst -= n;
+            return 0;
+        } else {
+            if(dfs(g, n) == 1) {
+                count++;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     struct graph *g;
@@ -93,5 +128,9 @@ int main(int argc, char *argv[])
     }
 
     print_graph(g);
+
+    dfs(g, 0);
+
+    printf("%d\n", count);
     exit(0);
 }
