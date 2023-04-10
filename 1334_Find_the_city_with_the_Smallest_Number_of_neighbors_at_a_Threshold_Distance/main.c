@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define nodesize 4
+#define nodesize 5
 #define edgesize 18
 
 int edges[edgesize] = {0, 1, 2, 0, 4, 8, 1, 2, 3, 1, 4, 2, 2, 3, 1, 3, 4, 1};
@@ -52,6 +52,7 @@ void print_graph(struct graph *g)
     for (int i = 0; i < nodesize; i++)
     {
         p = g->nodes[i];
+        printf("%d: ", i);
         while (p != NULL)
         {
             printf("%d(%d) ", p->val, p->weight);
