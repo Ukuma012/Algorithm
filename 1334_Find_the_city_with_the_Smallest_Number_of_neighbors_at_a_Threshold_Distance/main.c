@@ -17,6 +17,5 @@ struct graph
 
 int main(int argc, char *argv[])
 {
-    printf("%s\n", "Hello World");
     exit(0);
 }
