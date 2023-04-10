@@ -4,6 +4,7 @@
 
 #define nodesize 5
 #define edgesize 18
+#define distanceThreshold 2
 
 int edges[edgesize] = {0, 1, 2, 0, 4, 8, 1, 2, 3, 1, 4, 2, 2, 3, 1, 3, 4, 1};
 
