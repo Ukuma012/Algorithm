@@ -8,6 +8,9 @@
 
 int edges[edgesize] = {0, 1, 2, 0, 4, 8, 1, 2, 3, 1, 4, 2, 2, 3, 1, 3, 4, 1};
 
+int stack_pointer = 0;
+int stack[1000];
+
 struct node
 {
     int val;
@@ -61,6 +64,18 @@ void print_graph(struct graph *g)
         }
         printf("\n");
     }
+}
+
+void push(int val)
+{
+    stack[stack_pointer++] = val;
+}
+
+int pop()
+{
+    int n;
+    n = stack[--stack_pointer];
+    return n;
 }
 
 int main(int argc, char *argv[])
