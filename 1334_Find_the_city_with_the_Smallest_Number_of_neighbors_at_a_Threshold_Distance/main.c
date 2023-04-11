@@ -97,14 +97,19 @@ int dfs(struct graph *g, int x)
         push(p->val);
         p = p->next;
     }
-    while(!(stack_pointer == 0)){
+    while (!(stack_pointer == 0))
+    {
         int n = pop();
         dst += n;
-        if(dst > distanceThreshold) {
+        if (dst > distanceThreshold)
+        {
             dst -= n;
             return 0;
-        } else {
-            if(dfs(g, n) == 1) {
+        }
+        else
+        {
+            if (dfs(g, n) == 1)
+            {
                 count++;
                 return 1;
             }
