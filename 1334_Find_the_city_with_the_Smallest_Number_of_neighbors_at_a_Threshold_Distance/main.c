@@ -24,7 +24,18 @@ struct node
 struct graph
 {
     struct node *nodes[nodesize];
+    bool processed[nodesize];
+    int shortest[nodesize];
 };
+
+void init(struct graph *g)
+{
+    for (int i = 0; i < nodesize; i++)
+    {
+        g->processed[i] = false;
+        g->shortest[i] = 0;
+    }
+}
 
 void insert_edge(struct graph *g, int from_edge, int to_edge, int weight, bool directed)
 {
@@ -133,6 +144,8 @@ int main(int argc, char *argv[])
     }
 
     print_graph(g);
+
+    init(g);
 
     dfs(g, 0);
 
