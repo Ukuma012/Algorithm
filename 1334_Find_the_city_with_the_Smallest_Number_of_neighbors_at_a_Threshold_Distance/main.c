@@ -13,6 +13,8 @@ int stack[1000];
 int visited[1000];
 int dst = 0;
 
+int check = 0;
+
 struct node
 {
     int val;
@@ -99,6 +101,7 @@ int find_shortest(struct graph *g)
     {
         if (g->processed[i] == true)
         {
+            check++;
             continue;
         }
         else
@@ -120,6 +123,41 @@ int find_shortest(struct graph *g)
     return ans;
 }
 
+int dijkstra(struct graph *g, int x)
+{
+    g->processed[x] = true;
+    g->shortest[x] = 0;
+
+    struct node *p;
+    if ((p = malloc(sizeof(struct node))) == NULL)
+    {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    p = g->nodes[x];
+    while (p != NULL)
+    {
+        int n = g->shortest[x] + p->weight;
+        if (g->shortest[p->val] > n)
+        {
+            g->shortest[p->val] = n;
+        }
+        p = p->next;
+    }
+    if (check == nodesize)
+    {
+        return 1;
+    }
+    else
+    {
+        if (dijkstra(g, find_shortest(g)) == 1)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     struct graph *g;
@@ -135,6 +173,8 @@ int main(int argc, char *argv[])
     }
 
     init(g);
+
+    dijkstra(g, 0);
 
     print_graph(g);
 
