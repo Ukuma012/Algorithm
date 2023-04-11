@@ -12,7 +12,6 @@ int stack_pointer = 0;
 int stack[1000];
 int visited[1000];
 int dst = 0;
-int count = 0;
 
 struct node
 {
@@ -33,7 +32,7 @@ void init(struct graph *g)
     for (int i = 0; i < nodesize; i++)
     {
         g->processed[i] = false;
-        g->shortest[i] = 0;
+        g->shortest[i] = -1;
     }
 }
 
@@ -70,7 +69,7 @@ void print_graph(struct graph *g)
     for (int i = 0; i < nodesize; i++)
     {
         p = g->nodes[i];
-        printf("%d: ", i);
+        printf("%d %d(%d): ", g->processed[i], i, g->shortest[i]);
         while (p != NULL)
         {
             printf("%d(%d) ", p->val, p->weight);
@@ -92,41 +91,33 @@ int pop()
     return n;
 }
 
-int dfs(struct graph *g, int x)
+int find_shortest(struct graph *g)
 {
-    visited[x] = 1;
-
-    struct node *p;
-    p = g->nodes[x];
-    while (p != NULL)
+    int shortest = INT16_MAX;
+    int ans = 0;
+    for (int i = 0; i < nodesize; i++)
     {
-        if (visited[p->val] == 1)
+        if (g->processed[i] == true)
         {
-            p = p->next;
             continue;
-        }
-        push(p->val);
-        p = p->next;
-    }
-    while (!(stack_pointer == 0))
-    {
-        int n = pop();
-        dst += n;
-        if (dst > distanceThreshold)
-        {
-            dst -= n;
-            return 0;
         }
         else
         {
-            if (dfs(g, n) == 1)
+            if (g->shortest[i] == -1)
             {
-                count++;
-                return 1;
+                continue;
+            }
+            else
+            {
+                if (shortest > g->shortest[i])
+                {
+                    shortest = g->shortest[i];
+                    ans = i;
+                }
             }
         }
     }
-    return 0;
+    return ans;
 }
 
 int main(int argc, char *argv[])
@@ -143,12 +134,9 @@ int main(int argc, char *argv[])
         insert_edge(g, edges[i], edges[i + 1], edges[i + 2], false);
     }
 
-    print_graph(g);
-
     init(g);
 
-    dfs(g, 0);
+    print_graph(g);
 
-    printf("%d\n", count);
     exit(0);
 }
