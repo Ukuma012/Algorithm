@@ -133,15 +133,25 @@ int main(int argc, char *argv[])
         insert_edge(g, edges[i], edges[i + 1], edges[i + 2], false);
     }
 
-    init(g);
-
-    g->shortest[0] = 0;
     for (int i = 0; i < nodesize; i++)
     {
-        set(g, find_shortest(g));
+        init(g);
+        int count = -1;
+        g->shortest[i] = 0;
+        for (int j = 0; j < nodesize; j++)
+        {
+            set(g, find_shortest(g));
+        }
+        for (int h = 0; h < nodesize; h++)
+        {
+            if (g->shortest[h] <= distanceThreshold)
+            {
+                count++;
+            }
+        }
+        print_graph(g);
+        printf("%d\n", count);
     }
-
-    print_graph(g);
 
     exit(0);
 }
