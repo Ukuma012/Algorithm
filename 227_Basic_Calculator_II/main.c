@@ -3,6 +3,13 @@
 
 int main(int argc, char *argv[])
 {
-    printf("%s\n", "Hello World");
+    if (argc != 2)
+    {
+        fprintf(stderr, "argument");
+        exit(1);
+    }
+    char *s = argv[1];
+    printf("%s\n", s);
+
     exit(0);
 }
