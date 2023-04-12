@@ -10,13 +10,6 @@
 
 int edges[edgesize] = {0, 1, 2, 0, 4, 8, 1, 2, 3, 1, 4, 2, 2, 3, 1, 3, 4, 1};
 
-int stack_pointer = 0;
-int stack[1000];
-int visited[1000];
-int dst = 0;
-
-int check = 0;
-
 struct node
 {
     int val;
@@ -83,52 +76,28 @@ void print_graph(struct graph *g)
     }
 }
 
-void push(int val)
-{
-    stack[stack_pointer++] = val;
-}
-
-int pop()
-{
-    int n;
-    n = stack[--stack_pointer];
-    return n;
-}
-
 int find_shortest(struct graph *g)
 {
     int shortest = INT16_MAX;
     int ans = 0;
     for (int i = 0; i < nodesize; i++)
     {
-        if (g->processed[i] == true)
+        if (g->processed[i] == true || g->shortest[i] == -1)
         {
-            check++;
             continue;
         }
-        else
+        if (shortest > g->shortest[i])
         {
-            if (g->shortest[i] == -1)
-            {
-                continue;
-            }
-            else
-            {
-                if (shortest > g->shortest[i])
-                {
-                    shortest = g->shortest[i];
-                    ans = i;
-                }
-            }
+            shortest = g->shortest[i];
+            ans = i;
         }
     }
     return ans;
 }
 
-int dijkstra(struct graph *g, int x)
+void set(struct graph *g, int val)
 {
-    g->processed[x] = true;
-    g->shortest[x] = 0;
+    g->processed[val] = true;
 
     struct node *p;
     if ((p = malloc(sizeof(struct node))) == NULL)
@@ -136,28 +105,20 @@ int dijkstra(struct graph *g, int x)
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
-    p = g->nodes[x];
+    p = g->nodes[val];
     while (p != NULL)
     {
-        int n = g->shortest[x] + p->weight;
-        if (g->shortest[p->val] > n)
+        int n = g->shortest[val] + p->weight;
+        if (g->shortest[p->val] == -1)
+        {
+            g->shortest[p->val] = n;
+        }
+        else if (n < g->shortest[p->val])
         {
             g->shortest[p->val] = n;
         }
         p = p->next;
     }
-    if (check == nodesize)
-    {
-        return 1;
-    }
-    else
-    {
-        if (dijkstra(g, find_shortest(g)) == 1)
-        {
-            return 1;
-        }
-    }
-    return 0;
 }
 
 int main(int argc, char *argv[])
@@ -174,11 +135,25 @@ int main(int argc, char *argv[])
         insert_edge(g, edges[i], edges[i + 1], edges[i + 2], false);
     }
 
-    init(g);
-
-    dijkstra(g, 0);
-
-    print_graph(g);
+    for (int i = 0; i < nodesize; i++)
+    {
+        init(g);
+        int count = -1;
+        g->shortest[i] = 0;
+        for (int j = 0; j < nodesize; j++)
+        {
+            set(g, find_shortest(g));
+        }
+        for (int h = 0; h < nodesize; h++)
+        {
+            if (g->shortest[h] <= distanceThreshold)
+            {
+                count++;
+            }
+        }
+        print_graph(g);
+        printf("%d\n", count);
+    }
 
     exit(0);
 }
