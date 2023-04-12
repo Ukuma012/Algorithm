@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// test
+
 #define nodesize 5
 #define edgesize 18
 #define distanceThreshold 2
