@@ -37,13 +37,20 @@ int main(int argc, char *argv[])
         }
         if (isdigit(s[i]) != 0)
         {
-            printf("%s\n", "digit!");
+            push(s[i] - '0');
         }
         if (s[i] == '+')
         {
             printf("%s\n", "plus!");
         }
         printf("%c\n", s[i]);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < pointer; i++)
+    {
+        printf("%d\n", stack[i]);
     }
     exit(0);
 }
