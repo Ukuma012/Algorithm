@@ -63,11 +63,11 @@ int main(int argc, char *argv[])
         }
         else if (s[i] == '*')
         {
-            opt_push(s[i]);
+            digit_push((s[++i] - '0') * digit_pop());
         }
         else if (s[i] == '/')
         {
-            opt_push(s[i]);
+            digit_push((s[++i] - '0') / digit_pop());
         }
     }
 
