@@ -5,19 +5,33 @@
 #define maxlength 300000
 #define stack_size 1000
 
-int pointer = 0;
-int stack[stack_size];
+int digit_pointer = 0;
+int opt_pointer = 0;
+int digit_stack[stack_size];
+char opt_stack[stack_size];
 
-void push(int val)
+void digit_push(int val)
 {
-    stack[pointer++] = val;
+    digit_stack[digit_pointer++] = val;
 }
 
-int pop()
+void opt_push(char opt)
+{
+    opt_stack[opt_pointer++] = opt;
+}
+
+int digit_pop()
 {
     int n;
-    n = stack[--pointer];
+    n = digit_stack[--digit_pointer];
     return n;
+}
+
+char opt_pop()
+{
+    char c;
+    c = opt_stack[--opt_pointer];
+    return c;
 }
 
 int main(int argc, char *argv[])
@@ -37,20 +51,37 @@ int main(int argc, char *argv[])
         }
         if (isdigit(s[i]) != 0)
         {
-            push(s[i] - '0');
+            digit_push(s[i] - '0');
         }
         if (s[i] == '+')
         {
-            printf("%s\n", "plus!");
+            opt_push(s[i]);
+        }
+        else if (s[i] == '-')
+        {
+            opt_push(s[i]);
+        }
+        else if (s[i] == '*')
+        {
+            opt_push(s[i]);
+        }
+        else if (s[i] == '/')
+        {
+            opt_push(s[i]);
         }
         printf("%c\n", s[i]);
     }
 
     printf("\n");
 
-    for (int i = 0; i < pointer; i++)
+    for (int i = 0; i < digit_pointer; i++)
     {
-        printf("%d\n", stack[i]);
+        printf("%d\n", digit_stack[i]);
+    }
+
+    for (int i = 0; i < opt_pointer; i++)
+    {
+        printf("%c\n", opt_stack[i]);
     }
     exit(0);
 }
