@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define maxlength 300000
 #define stack_size 1000
@@ -34,9 +35,13 @@ int main(int argc, char *argv[])
         {
             break;
         }
+        if (isdigit(s[i]) != 0)
+        {
+            printf("%s\n", "digit!");
+        }
         if (s[i] == '+')
         {
-            printf("%s\n", "plus");
+            printf("%s\n", "plus!");
         }
         printf("%c\n", s[i]);
     }
