@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
         {
             opt_push(s[i]);
         }
-        printf("%c\n", s[i]);
     }
 
     printf("\n");
