@@ -2,6 +2,22 @@
 #include <stdlib.h>
 
 #define maxlength 300000
+#define stack_size 1000
+
+int pointer = 0;
+int stack[stack_size];
+
+void push(int val)
+{
+    stack[pointer++] = val;
+}
+
+int pop()
+{
+    int n;
+    n = stack[--pointer];
+    return n;
+}
 
 int main(int argc, char *argv[])
 {
