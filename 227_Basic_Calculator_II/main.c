@@ -49,6 +49,10 @@ int main(int argc, char *argv[])
         {
             break;
         }
+        if (s[i] == ' ')
+        {
+            continue;
+        }
         if (isdigit(s[i]) != 0)
         {
             digit_push(s[i] - '0');
@@ -67,20 +71,26 @@ int main(int argc, char *argv[])
         }
         else if (s[i] == '/')
         {
-            digit_push((s[++i] - '0') / digit_pop());
+            digit_push(digit_pop() / (s[++i] - '0'));
         }
     }
 
-    printf("\n");
-
-    for (int i = 0; i < digit_pointer; i++)
+    while (opt_pointer != 0)
     {
-        printf("%d\n", digit_stack[i]);
+        int opt = opt_pop();
+        if (opt == '+')
+        {
+            int a = digit_pop();
+            int b = digit_pop();
+            digit_push(a + b);
+        }
+        if (opt == '-')
+        {
+            int a = digit_pop();
+            int b = digit_pop();
+            digit_push(b - a);
+        }
     }
-
-    for (int i = 0; i < opt_pointer; i++)
-    {
-        printf("%c\n", opt_stack[i]);
-    }
+    printf("%d\n", digit_pop());
     exit(0);
 }

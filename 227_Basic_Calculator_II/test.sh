@@ -15,6 +15,6 @@ assert() {
 
 assert 7 "3+2*2" 
 assert 1 "3/2"
-assert 5 "3+5 / 2" 
+assert 5 "3+5/2" 
 
 echo OK
