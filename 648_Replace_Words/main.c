@@ -26,14 +26,14 @@ int main(int argc, char *argv[]) {
     int j = 0;
     while(dictionary[0][i] != '\0') {
         if(sentence[j] != dictionary[0][i]) {
-            printf("%s\n", "No");
-            exit(0);
+            while(sentence[j] != ' ') {
+                printf("%c", sentence[j]);
+                j++;
+            }
+            break;
         }
         j++;
         i++;
     }
-
-    printf("%s\n", "Ok");
-
     exit(0);
 }
