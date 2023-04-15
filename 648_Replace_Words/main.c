@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
     token = strtok(sentence, delim);
 
     while(token != NULL) {
+        // ここで処理
         printf("%s\n", token);
         token = strtok(NULL, delim);
     }
