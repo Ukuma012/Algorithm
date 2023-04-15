@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define dictionarySize 3
 #define sentencelength 1000000
@@ -20,20 +21,30 @@ int hash(char c) {
     return n;
 }
 
-int main(int argc, char *argv[]) {
+int i = 0;
+int j = 0;
 
-    int i = 0;
-    int j = 0;
+int check() {
     while(dictionary[0][i] != '\0') {
         if(sentence[j] != dictionary[0][i]) {
             while(sentence[j] != ' ') {
                 printf("%c", sentence[j]);
                 j++;
             }
-            break;
+            printf("%s", " ");
+            j++;
+            return false;
         }
         j++;
         i++;
     }
+    return true;
+}
+
+int main(int argc, char *argv[]) {
+    if(check() != false) {
+
+    } 
+    check();
     exit(0);
 }
