@@ -36,19 +36,21 @@ void graph_init(struct graph *g)
 
 int find_shortest(struct graph *g)
 {
-    int min = 0;
+    int shortest = INT16_MAX;
+    int ans = 0;
     for (int i = 0; i < nodesize; i++)
     {
         if (g->processed[i] == true || g->shortest[i] == -1)
         {
             continue;
         }
-        if (g->shortest[i] < min)
+        if (g->shortest[i] < shortest)
         {
-            min = g->shortest[i];
+            shortest = g->shortest[i];
+            ans = i;
         }
     }
-    return min;
+    return ans;
 }
 
 void dijkstra(struct graph *g, int x)
@@ -57,7 +59,7 @@ void dijkstra(struct graph *g, int x)
     struct node *p;
     if ((p = malloc(sizeof(struct node))) == NULL)
     {
-        fpritnf(stderr, "malloc failed\n");
+        fprintf(stderr, "malloc failed\n");
         exit(1);
     }
     p = g->nodes[x];
@@ -111,7 +113,7 @@ void print_graph(struct graph *g)
     for (int i = 0; i < nodesize; i++)
     {
         p = g->nodes[i];
-        printf("%d: ", i);
+        printf("%d %d %d: ", g->ways[i], g->shortest[i], i);
         while (p != NULL)
         {
             printf("%d(%d) ", p->val, p->weight);
@@ -137,7 +139,18 @@ int main(int argc, char *argv[])
         insert_edge(g, roads[i], roads[i + 1], roads[i + 2], false);
     }
 
+    g->ways[0] = 1;
+    g->shortest[0] = 0;
+    for (int i = 0; i < nodesize; i++)
+    {
+        dijkstra(g, find_shortest(g));
+    }
+
     print_graph(g);
+
+    printf("\n");
+
+    printf("%d\n", g->ways[target - 1]);
 
     exit(0);
 }
