@@ -22,6 +22,17 @@ struct graph
     int ways[nodesize];
 };
 
+void graph_init(struct graph *g)
+{
+    for (int i = 0; i < nodesize; i++)
+    {
+        g->nodes[i] = NULL;
+        g->processed[i] = false;
+        g->shortest[i] = -1;
+        g->ways[i] = 0;
+    }
+}
+
 void insert_edge(struct graph *g, int from_edge, int to_edge, int weight, bool directed)
 {
     struct node *new;
