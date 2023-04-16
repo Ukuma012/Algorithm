@@ -7,7 +7,7 @@
 
 int roads[roadssize] = {0, 6, 7, 0, 1, 2, 1, 2, 3, 1, 3, 3, 6, 3, 3, 3, 5, 1, 6, 5, 1, 2, 5, 1, 0, 4, 5, 4, 6, 2};
 
-int n = 7;
+int target = 7;
 struct node
 {
     int val;
@@ -49,6 +49,33 @@ int find_shortest(struct graph *g)
         }
     }
     return min;
+}
+
+void dijkstra(struct graph *g, int x)
+{
+    g->processed[x] = true;
+    struct node *p;
+    if ((p = malloc(sizeof(struct node))) == NULL)
+    {
+        fpritnf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    p = g->nodes[x];
+    while (p != NULL)
+    {
+        int n = g->shortest[x] + p->weight;
+        if (g->shortest[p->val] == -1)
+        {
+            g->shortest[p->val] = n;
+            g->ways[p->val] = g->ways[x];
+        }
+        else if (n <= g->shortest[p->val])
+        {
+            g->shortest[p->val] = n;
+            g->ways[p->val] += g->ways[x];
+        }
+        p = p->next;
+    }
 }
 
 void insert_edge(struct graph *g, int from_edge, int to_edge, int weight, bool directed)
