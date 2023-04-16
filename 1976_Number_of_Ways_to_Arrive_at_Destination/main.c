@@ -2,19 +2,24 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define nodesize 7 
+#define nodesize 7
 #define roadssize 30
 
 int roads[roadssize] = {0, 6, 7, 0, 1, 2, 1, 2, 3, 1, 3, 3, 6, 3, 3, 3, 5, 1, 6, 5, 1, 2, 5, 1, 0, 4, 5, 4, 6, 2};
 
-struct node {
+struct node
+{
     int val;
     int weight;
     struct node *next;
 };
 
-struct graph {
+struct graph
+{
     struct node *nodes[nodesize];
+    bool processed[nodesize];
+    int shortest[nodesize];
+    int ways[nodesize];
 };
 
 void insert_edge(struct graph *g, int from_edge, int to_edge, int weight, bool directed)
@@ -60,15 +65,18 @@ void print_graph(struct graph *g)
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     struct graph *g;
-    if((g = malloc(sizeof(struct graph))) == NULL) {
+    if ((g = malloc(sizeof(struct graph))) == NULL)
+    {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
 
-    for(int i = 0; i < roadssize; i += 3) {
-        insert_edge(g, roads[i], roads[i+1], roads[i+2], false);
+    for (int i = 0; i < roadssize; i += 3)
+    {
+        insert_edge(g, roads[i], roads[i + 1], roads[i + 2], false);
     }
 
     print_graph(g);
