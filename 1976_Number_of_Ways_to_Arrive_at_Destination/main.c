@@ -85,6 +85,8 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
+    graph_init(g);
+
     for (int i = 0; i < roadssize; i += 3)
     {
         insert_edge(g, roads[i], roads[i + 1], roads[i + 2], false);
