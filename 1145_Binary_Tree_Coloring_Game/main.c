@@ -28,6 +28,20 @@ struct TreeNode *createNode(int val)
     return new;
 }
 
+int check(int x)
+{
+    int y = 0;
+    if (x % 2 == 0)
+    {
+        y = x + 1;
+    }
+    else
+    {
+        y = x - 1;
+    }
+    return y;
+}
+
 int main(int argc, char *argv[])
 {
     struct TreeNode *root = createNode(1);
