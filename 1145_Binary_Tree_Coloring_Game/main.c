@@ -28,6 +28,15 @@ struct TreeNode *createNode(int val)
     return new;
 }
 
+bool check(struct TreeNode *root, int x)
+{
+    if (x == root->val)
+    {
+        return false;
+    }
+    return true;
+}
+
 int main(int argc, char *argv[])
 {
     struct TreeNode *root = createNode(1);
@@ -56,6 +65,11 @@ int main(int argc, char *argv[])
 
     node5->left = node10;
     node5->right = node11;
+
+    if (!check(root, 1))
+    {
+        printf("%s\n", "false");
+    }
 
     exit(0);
 }
