@@ -4,7 +4,8 @@
 
 int n = 11;
 int x = 3;
-bool flag = false;
+int right = 0;
+int left = 0;
 
 struct TreeNode
 {
@@ -27,6 +28,28 @@ struct TreeNode *createNode(int val)
     new->right = NULL;
 
     return new;
+}
+
+int count(struct TreeNode *node)
+{
+    if (node == NULL)
+    {
+        return 0;
+    }
+
+    int l = count(node->left);
+    int r = count(node->right);
+    if (node->val == x)
+    {
+        right = r;
+        left = l;
+    }
+    return l + r + 1;
+}
+
+int max(int a, int b)
+{
+    return (a > b) ? a : b;
 }
 
 int main(int argc, char *argv[])
@@ -57,6 +80,17 @@ int main(int argc, char *argv[])
 
     node5->left = node10;
     node5->right = node11;
+
+    int n = count(root);
+    bool ans = (max(max(left, right), n - left - right - 1) > (n / 2));
+    if (ans)
+    {
+        printf("%s\n", "True");
+    }
+    else
+    {
+        printf("%s\n", "False");
+    }
 
     exit(0);
 }
