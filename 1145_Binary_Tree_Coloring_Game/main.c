@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+int n = 11;
+int x = 3;
+
 struct TreeNode
 {
     int val;
