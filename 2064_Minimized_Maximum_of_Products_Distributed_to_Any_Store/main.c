@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define quantitiesSize 2
+// #define quantitiesSize 2
+#define quantitiesSize 3
 
-int n = 6;
-int quantities[quantitiesSize] = {11, 6};
+// int n = 6;
+// int quantities[quantitiesSize] = {11, 6};
+
+int n = 7;
+int quantities[quantitiesSize] = {15, 10, 10};
 
 bool canDistribute(int k)
 {
@@ -26,11 +30,30 @@ bool canDistribute(int k)
     }
 }
 
+int binary_search(int low, int high)
+{
+    int left = low;
+    int right = high;
+    int mid = (left + right) / 2;
+
+    if ((left + 1 == right) && !canDistribute(left) && canDistribute(right))
+    {
+        return right;
+    }
+
+    if (canDistribute(mid))
+    {
+        return binary_search(left, mid);
+    }
+    else
+    {
+        return binary_search(mid, right);
+    }
+}
+
 int main(int argc, char *argv[])
 {
-    for (int i = 1; i < 10; i++)
-    {
-        printf("%d\n", canDistribute(i));
-    }
+    int ans = binary_search(1, 10);
+    printf("%d\n", ans);
     exit(0);
 }
