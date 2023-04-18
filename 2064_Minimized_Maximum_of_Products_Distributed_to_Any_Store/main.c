@@ -28,6 +28,9 @@ bool canDistribute(int k)
 
 int main(int argc, char *argv[])
 {
-    printf("%d\n", canDistribute(3));
+    for (int i = 1; i < 10; i++)
+    {
+        printf("%d\n", canDistribute(i));
+    }
     exit(0);
 }
