@@ -43,7 +43,7 @@ int y_position(int x)
     return y;
 }
 
-int dfs(struct TreeNode *node, int n)
+bool dfs(struct TreeNode *node, int n)
 {
     if (node->val == n)
     {
