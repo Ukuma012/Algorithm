@@ -29,39 +29,6 @@ struct TreeNode *createNode(int val)
     return new;
 }
 
-int y_position(int x)
-{
-    int y = 0;
-    if (x % 2 == 0)
-    {
-        y = x + 1;
-    }
-    else
-    {
-        y = x - 1;
-    }
-    return y;
-}
-
-bool dfs(struct TreeNode *node, int n)
-{
-    if (node->val == n)
-    {
-        return true;
-    }
-
-    if (dfs(node->left, n) == true)
-    {
-        return true;
-    }
-    else if (dfs(node->right, n) == true)
-    {
-        return true;
-    }
-
-    return false;
-}
-
 int main(int argc, char *argv[])
 {
     struct TreeNode *root = createNode(1);
