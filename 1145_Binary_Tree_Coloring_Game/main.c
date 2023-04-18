@@ -28,15 +28,6 @@ struct TreeNode *createNode(int val)
     return new;
 }
 
-bool check(struct TreeNode *root, int x)
-{
-    if (x == root->val)
-    {
-        return false;
-    }
-    return true;
-}
-
 int main(int argc, char *argv[])
 {
     struct TreeNode *root = createNode(1);
