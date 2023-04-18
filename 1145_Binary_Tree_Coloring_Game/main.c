@@ -4,6 +4,7 @@
 
 int n = 11;
 int x = 3;
+bool flag = false;
 
 struct TreeNode
 {
@@ -40,6 +41,25 @@ int y_position(int x)
         y = x - 1;
     }
     return y;
+}
+
+int dfs(struct TreeNode *node, int n)
+{
+    if (node->val == n)
+    {
+        return true;
+    }
+
+    if (dfs(node->left, n) == true)
+    {
+        return true;
+    }
+    else if (dfs(node->right, n) == true)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 int main(int argc, char *argv[])
