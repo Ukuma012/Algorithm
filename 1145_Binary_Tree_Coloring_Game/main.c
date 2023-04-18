@@ -28,7 +28,7 @@ struct TreeNode *createNode(int val)
     return new;
 }
 
-int check(int x)
+int y_position(int x)
 {
     int y = 0;
     if (x % 2 == 0)
@@ -70,11 +70,6 @@ int main(int argc, char *argv[])
 
     node5->left = node10;
     node5->right = node11;
-
-    if (!check(root, 1))
-    {
-        printf("%s\n", "false");
-    }
 
     exit(0);
 }
