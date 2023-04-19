@@ -8,5 +8,10 @@ int main(int argc, char *argv[])
     int numsSize = sizeof(nums) / sizeof(int);
     int queriesSize = sizeof(queries) / sizeof(int);
 
+
+    // 配列のソート
+    // targetを探す
+    // マイナスとプラスで計算
+
     exit(0);
 }
