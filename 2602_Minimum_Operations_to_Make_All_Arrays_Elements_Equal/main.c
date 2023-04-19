@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
 
 
     // 配列のソート
+    quick_sort(nums, numsSize);
     // targetを探す
     // マイナスとプラスで計算
 
