@@ -32,6 +32,22 @@ int partition(int a[], int l, int r) {
     return i;
 }
 
+void quick_sort_l(int a[], int l, int r) {
+    int v;
+    if(l >= r) {
+        return;
+    }
+
+    v = partition(a, l, r);
+
+    quick_sort_l(a, l, v-1);
+    quick_sort_l(a, v+1, r);
+}
+
+void quick_sort(int a[], int n) {
+    quick_sort_l(a, 0, n-1);
+}
+
 int main(int argc, char *argv[])
 {
     int nums[] = {3, 1, 6, 8};
