@@ -79,8 +79,9 @@ int binary_serch(int a[], int low, int high, int target)
 
 int main(int argc, char *argv[])
 {
-    int nums[] = {3, 1, 6, 8};
-    int queries[] = {1, 5};
+    // int nums[] = {3, 1, 6, 8};
+    int nums[] = {2, 9, 6, 3};
+    int queries[] = {10};
     int numsSize = sizeof(nums) / sizeof(int);
     int queriesSize = sizeof(queries) / sizeof(int);
 
